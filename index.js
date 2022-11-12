@@ -26,7 +26,7 @@ const shop = new Sprite({
   framesMax: 6
 })
 
-const player = new Fighter({
+const tristan = new Fighter({
   id: 1,
   position: {
     x: 0,
@@ -40,7 +40,7 @@ const player = new Fighter({
     x: 0,
     y: 0
   },
-  imageSrc: './img/samuraiMack/Idle.png',
+  imageSrc: './img/tristan/Idle.png',
   framesMax: 8,
   scale: 2.5,
   offset: {
@@ -49,35 +49,35 @@ const player = new Fighter({
   },
   sprites: {
     idle: {
-      imageSrc: './img/samuraiMack/Idle.png',
+      imageSrc: './img/tristan/Idle.png',
       framesMax: 8
     },
     run: {
-      imageSrc: './img/samuraiMack/Run.png',
+      imageSrc: './img/tristan/Run.png',
       framesMax: 8
     },
     jump: {
-      imageSrc: './img/samuraiMack/Jump.png',
+      imageSrc: './img/tristan/Jump.png',
       framesMax: 2
     },
     fall: {
-      imageSrc: './img/samuraiMack/Fall.png',
+      imageSrc: './img/tristan/Fall.png',
       framesMax: 2
     },
     attack1: {
-      imageSrc: './img/samuraiMack/Attack1.png',
+      imageSrc: './img/tristan/Attack1.png',
       framesMax: 6
     },
     takeHit: {
-      imageSrc: './img/samuraiMack/Take Hit - white silhouette.png',
+      imageSrc: './img/tristan/Take Hit - white silhouette.png',
       framesMax: 4
     },
     death: {
-      imageSrc: './img/samuraiMack/Death.png',
+      imageSrc: './img/tristan/Death.png',
       framesMax: 6
     },
     skill: {
-      imageSrc: './img/samuraiMack/Attack2.png',
+      imageSrc: './img/tristan/Attack2.png',
       framesMax: 4
     }
   },
@@ -226,6 +226,8 @@ const player3 = new Fighter({
     height: 50
   }
 })
+
+const player = tristan
 
 console.log(player)
 

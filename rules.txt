@@ -11,3 +11,5 @@ l: right
 i: jump
 k: attack (deals 10 damage in shorter range, takes 4 frame)
 u: special ability (deals 20 damage in longer range, takes 3 frame, can be interupted)
+
+https://willowy-piroshki-23d5ac.netlify.app/
