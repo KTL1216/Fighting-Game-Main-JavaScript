@@ -53,6 +53,7 @@ class Sprite {
 
 class Fighter extends Sprite {
   constructor({
+    id,
     position,
     velocity,
     color = 'red',
@@ -61,6 +62,8 @@ class Fighter extends Sprite {
     framesMax = 1,
     offset = { x: 0, y: 0 },
     sprites,
+    health,
+    damageTaken,
     attackBox = { offset: {}, width: undefined, height: undefined }
   }) {
     super({
@@ -70,7 +73,7 @@ class Fighter extends Sprite {
       framesMax,
       offset
     })
-
+    this.id = id
     this.velocity = velocity
     this.width = 50
     this.height = 150
@@ -86,7 +89,8 @@ class Fighter extends Sprite {
     }
     this.color = color
     this.isAttacking
-    this.health = 100
+    this.health = health
+    this.damageTaken = damageTaken;
     this.framesCurrent = 0
     this.framesElapsed = 0
     this.framesHold = 5
@@ -130,8 +134,22 @@ class Fighter extends Sprite {
     this.isAttacking = true
   }
 
+  skill() {
+    if (this.id == 1) {
+        if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) { 
+            this.attackBox.width = 200;
+            this.switchSprite('skill')
+            this.isAttacking = true
+            this.damageTaken = 0;
+        }
+    } else if (this.id == 2) {
+        this.switchSprite('skill')
+        this.isAttacking = true
+    }
+  }
+
   takeHit() {
-    this.health -= 20
+    this.health -= this.damageTaken
 
     if (this.health <= 0) {
       this.switchSprite('death')
@@ -145,10 +163,13 @@ class Fighter extends Sprite {
       return
     }
 
-    // overriding all other animations with the attack animation
     if (
-      this.image === this.sprites.attack1.image &&
-      this.framesCurrent < this.sprites.attack1.framesMax - 1
+        // overriding all other animations with the skill animation
+        this.image === this.sprites.skill.image &&
+        this.framesCurrent < this.sprites.skill.framesMax - 1
+        // overriding all other animations with the attack animation
+        || this.image === this.sprites.attack1.image &&
+        this.framesCurrent < this.sprites.attack1.framesMax - 1
     )
       return
 
@@ -211,6 +232,14 @@ class Fighter extends Sprite {
           this.image = this.sprites.death.image
           this.framesMax = this.sprites.death.framesMax
           this.framesCurrent = 0
+        }
+        break
+
+      case 'skill':
+        if (this.image !== this.sprites.skill.image) {
+            this.image = this.sprites.skill.image
+            this.framesMax = this.sprites.skill.framesMax
+            this.framesCurrent = 0
         }
         break
     }

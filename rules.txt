@@ -1,0 +1,13 @@
+Player 1:
+a: left
+d: right
+w: jump
+space: attack (deals 10 damage, takes 6 frame)
+q: special ability (deals 10 damage in longer range, takes 5 frame, invincible during, can't be used mid air or moving)
+
+Player 2:
+j: left
+l: right
+i: jump
+k: attack (deals 10 damage in shorter range, takes 4 frame)
+u: special ability (deals 20 damage in longer range, takes 3 frame, can be interupted)
