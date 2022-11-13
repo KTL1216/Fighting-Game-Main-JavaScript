@@ -1,3 +1,5 @@
+press Enter to start game
+
 Player 2:
 j: left
 l: right
@@ -33,4 +35,4 @@ w: jump
 s: attack (deals 25 damage, can't hit enemy that's too close)
 
 
-https://bright-druid-1853a4.netlify.app
+https://enchanting-babka-2381f5.netlify.app/

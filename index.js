@@ -240,10 +240,10 @@ const jessica = new Fighter({
   damageTaken: 10,
   attackBox: {
     offset: {
-      x: 90,
+      x: 80,
       y: 50
     },
-    width: 100,
+    width: 110,
     height: 50
   }
 })
@@ -469,7 +469,12 @@ const keys = {
   }
 }
 
-decreaseTimer()
+window.addEventListener('keydown', (event) => {
+  if (event.key === "Enter") {
+    decreaseTimer()
+  }
+})
+
 
 function animate() {
 
