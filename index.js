@@ -93,7 +93,7 @@ const tristan = new Fighter({
   }
 })
 
-const enemy = new Fighter({
+const kentonEnemy = new Fighter({
   id: 2,
   position: {
     x: 900,
@@ -108,7 +108,7 @@ const enemy = new Fighter({
     x: -50,
     y: 0
   },
-  imageSrc: './img/kenji/Idle.png',
+  imageSrc: './img/kenton-enemy/Idle.png',
   framesMax: 4,
   scale: 2.5,
   offset: {
@@ -117,35 +117,35 @@ const enemy = new Fighter({
   },
   sprites: {
     idle: {
-      imageSrc: './img/kenji/Idle.png',
+      imageSrc: './img/kenton-enemy/Idle.png',
       framesMax: 4
     },
     run: {
-      imageSrc: './img/kenji/Run.png',
+      imageSrc: './img/kenton-enemy/Run.png',
       framesMax: 8
     },
     jump: {
-      imageSrc: './img/kenji/Jump.png',
+      imageSrc: './img/kenton-enemy/Jump.png',
       framesMax: 2
     },
     fall: {
-      imageSrc: './img/kenji/Fall.png',
+      imageSrc: './img/kenton-enemy/Fall.png',
       framesMax: 2
     },
     attack1: {
-      imageSrc: './img/kenji/Attack1.png',
+      imageSrc: './img/kenton-enemy/Attack1.png',
       framesMax: 4
     },
     takeHit: {
-      imageSrc: './img/kenji/Take hit.png',
+      imageSrc: './img/kenton-enemy/Take hit.png',
       framesMax: 3
     },
     death: {
-      imageSrc: './img/kenji/Death.png',
+      imageSrc: './img/kenton-enemy/Death.png',
       framesMax: 7
     },
     skill: {
-      imageSrc: './img/kenji/Attack2.png',
+      imageSrc: './img/kenton-enemy/Attack2.png',
       framesMax: 3
     }
   },
@@ -156,78 +156,80 @@ const enemy = new Fighter({
       x: -170,
       y: 50
     },
-    width: 150,
+    width: 130,
     height: 50
   }
 })
 
-const player3 = new Fighter({
+const jessica = new Fighter({
   id: 3,
   position: {
-    x: 400,
-    y: 100
+    x: 0,
+    y: 0
   },
   velocity: {
     x: 0,
     y: 0
   },
-  color: 'blue',
   offset: {
-    x: -50,
+    x: 0,
     y: 0
   },
-  imageSrc: './img/kenji/Idle.png',
-  framesMax: 4,
-  scale: 2.5,
+  imageSrc: './img/jessica/Idle.png',
+  framesMax: 8,
+  scale: 3.5,
   offset: {
-    x: 215,
-    y: 167
+    x: 100,
+    y: 80
   },
   sprites: {
     idle: {
-      imageSrc: './img/kenji/Idle.png',
+      imageSrc: './img/jessica/Idle.png',
       framesMax: 4
     },
     run: {
-      imageSrc: './img/kenji/Run.png',
+      imageSrc: './img/jessica/Run.png',
       framesMax: 8
     },
     jump: {
-      imageSrc: './img/kenji/Jump.png',
+      imageSrc: './img/jessica/Jump.png',
       framesMax: 2
     },
     fall: {
-      imageSrc: './img/kenji/Fall.png',
+      imageSrc: './img/jessica/Fall.png',
       framesMax: 2
     },
     attack1: {
-      imageSrc: './img/kenji/Attack1.png',
-      framesMax: 6
-    },
-    takeHit: {
-      imageSrc: './img/kenji/Take hit.png',
+      imageSrc: './img/jessica/Attack1.png',
       framesMax: 3
     },
+    takeHit: {
+      imageSrc: './img/jessica/Take hit.png',
+      framesMax: 4
+    },
     death: {
-      imageSrc: './img/kenji/Death.png',
-      framesMax: 7
+      imageSrc: './img/jessica/Death.png',
+      framesMax: 4
     },
     skill: {
-      imageSrc: './img/kenji/Attack2.png',
-      framesMax: 6
+      imageSrc: './img/jessica/Attack2.png',
+      framesMax: 3
     }
   },
+  health: 100,
+  damageTaken: 10,
   attackBox: {
     offset: {
-      x: -170,
+      x: 120,
       y: 50
     },
-    width: 170,
+    width: 95,
     height: 50
   }
 })
 
-const player = tristan
+const player = jessica
+const enemy = kentonEnemy
 
 console.log(player)
 
@@ -249,6 +251,24 @@ const keys = {
 decreaseTimer()
 
 function animate() {
+  //deciding attacking speed
+  var playerHitFrame
+  if (player.id == 1) {
+    playerHitFrame = 4
+  } else if (player.id == 2) {
+    playerHitFrame = 2
+  } else if (player.id == 3) {
+    playerHitFrame = 1
+  }
+  var enemyHitFrame
+  if (enemy.id == 1) {
+    enemyHitFrame = 4
+  } else if (enemy.id == 2) {
+    enemyHitFrame = 2
+  } else if (enemy.id == 3) {
+    enemyHitFrame = 1
+  }
+
   window.requestAnimationFrame(animate)
   c.fillStyle = 'black'
   c.fillRect(0, 0, canvas.width, canvas.height)
@@ -306,7 +326,7 @@ function animate() {
       rectangle2: enemy
     }) &&
     player.isAttacking &&
-    player.framesCurrent === 4
+    player.framesCurrent === playerHitFrame
   ) {
     enemy.takeHit()
     player.isAttacking = false
@@ -324,7 +344,7 @@ function animate() {
   }
 
   // if player misses
-  if (player.isAttacking && player.framesCurrent === 4) {
+  if (player.isAttacking && player.framesCurrent === playerHitFrame) {
     player.isAttacking = false
 
     if (player.id == 1) {
@@ -341,7 +361,7 @@ function animate() {
       rectangle2: player
     }) &&
     enemy.isAttacking &&
-    enemy.framesCurrent === 2
+    enemy.framesCurrent === enemyHitFrame
   ) {
     player.takeHit()
     enemy.isAttacking = false
@@ -354,7 +374,7 @@ function animate() {
   }
 
   // if enemy misses
-  if (enemy.isAttacking && enemy.framesCurrent === 2) {
+  if (enemy.isAttacking && enemy.framesCurrent === enemyHitFrame) {
     enemy.isAttacking = false
     
     player.damageTaken = 10
@@ -382,7 +402,7 @@ window.addEventListener('keydown', (event) => {
       case 'w':
         player.velocity.y = -20
         break
-      case ' ':
+      case 's':
         player.attack()
         break
       case 'q':

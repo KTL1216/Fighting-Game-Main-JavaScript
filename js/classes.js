@@ -145,7 +145,11 @@ class Fighter extends Sprite {
     } else if (this.id == 2) {
         this.switchSprite('skill')
         this.isAttacking = true
-    }
+    } else if (this.id == 3) {
+      this.switchSprite('skill')
+      this.position.x += 100
+      this.isAttacking = true
+  }
   }
 
   takeHit() {

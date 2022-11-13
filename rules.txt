@@ -1,15 +1,36 @@
-Player 1:
-a: left
-d: right
-w: jump
-space: attack (deals 10 damage, takes 6 frame)
-q: special ability (deals 10 damage in longer range, takes 5 frame, invincible during, can't be used mid air or moving)
-
 Player 2:
 j: left
 l: right
 i: jump
 k: attack (deals 10 damage in shorter range, takes 4 frame)
 u: special ability (deals 20 damage in longer range, takes 3 frame, can be interupted)
+
+Player 1 - Tristan:
+a: left
+d: right
+w: jump
+s: attack (deals 10 damage, takes 6 frame)
+q: special ability (deals 20 damage in longer range, takes 5 frame, invincible during, can't be used mid air or moving)
+
+Player 1 - Jessica
+a: left
+d: right
+w: jump
+s: attack (deals 10 damage shorter range, takes 3 frame)
+q: special ability (deals 10 damage in longer range, takes 4 frame, invincible during, teleport in front)
+
+Player 1 - David
+a: left
+d: right
+w: jump
+s: attack (deals 20 damage shorter range, takes 7 frame)
+q: special ability (deals 25 damage in longer range, takes 8 frame, invincible during, teleport in front)
+
+Player 1 - Daniel
+a: left
+d: right
+w: jump
+s: attack (deals 10 damage twice during 8 frame)
+
 
 https://willowy-piroshki-23d5ac.netlify.app/
