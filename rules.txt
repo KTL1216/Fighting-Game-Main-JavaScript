@@ -30,7 +30,7 @@ Player 1 - Daniel
 a: left
 d: right
 w: jump
-s: attack (deals 10 damage twice during 8 frame)
+s: attack (deals 25 damage, can't hit enemy that's too close)
 
 
 https://willowy-piroshki-23d5ac.netlify.app/

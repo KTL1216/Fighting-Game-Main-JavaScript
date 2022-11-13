@@ -1,3 +1,23 @@
+function toggleDiv() {
+  console.log("toggle")
+  if(document.getElementById("selection").style.display == 'inline-block')
+  {
+  document.getElementById("selection").style.display = 'none';
+  document.getElementById("game").style.display = 'inline-block';
+  }
+ 
+  else
+  {  
+  document.getElementById("game").style.display = 'none';
+  document.getElementById("selection").style.display = 'inline-block'
+  }
+}
+
+let tristanButton = document.getElementById("tristan-button");
+let jessicaButton = document.getElementById("jessica-button");
+let davidButton = document.getElementById("david-button");
+let danielButton = document.getElementById("daniel-button");
+
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
@@ -179,7 +199,7 @@ const jessica = new Fighter({
   framesMax: 8,
   scale: 3.5,
   offset: {
-    x: 100,
+    x: 120,
     y: 80
   },
   sprites: {
@@ -220,16 +240,217 @@ const jessica = new Fighter({
   damageTaken: 10,
   attackBox: {
     offset: {
-      x: 120,
+      x: 90,
       y: 50
     },
-    width: 95,
+    width: 100,
     height: 50
   }
 })
 
-const player = jessica
-const enemy = kentonEnemy
+const david = new Fighter({
+  id: 4,
+  position: {
+    x: 0,
+    y: 0
+  },
+  velocity: {
+    x: 0,
+    y: 0
+  },
+  offset: {
+    x: 0,
+    y: 0
+  },
+  imageSrc: './img/david/Idle.png',
+  framesMax: 10,
+  scale: 3,
+  offset: {
+    x: 200,
+    y: 145
+  },
+  sprites: {
+    idle: {
+      imageSrc: './img/david/Idle.png',
+      framesMax: 10
+    },
+    run: {
+      imageSrc: './img/david/Run.png',
+      framesMax: 8
+    },
+    jump: {
+      imageSrc: './img/david/Jump.png',
+      framesMax: 3
+    },
+    fall: {
+      imageSrc: './img/david/Fall.png',
+      framesMax: 3
+    },
+    attack1: {
+      imageSrc: './img/david/Attack1.png',
+      framesMax: 7
+    },
+    takeHit: {
+      imageSrc: './img/david/Take hit.png',
+      framesMax: 3
+    },
+    death: {
+      imageSrc: './img/david/Death.png',
+      framesMax: 7
+    },
+    skill: {
+      imageSrc: './img/david/Attack3.png',
+      framesMax: 8
+    }
+  },
+  health: 100,
+  damageTaken: 10,
+  attackBox: {
+    offset: {
+      x: 130,
+      y: 65
+    },
+    width: 120,
+    height: 50
+  }
+})
+
+const daniel = new Fighter({
+  id: 5,
+  position: {
+    x: 0,
+    y: 0
+  },
+  velocity: {
+    x: 0,
+    y: 0
+  },
+  offset: {
+    x: 0,
+    y: 0
+  },
+  imageSrc: './img/daniel/Idle.png',
+  framesMax: 8,
+  scale: 3,
+  offset: {
+    x: 200,
+    y: 145
+  },
+  sprites: {
+    idle: {
+      imageSrc: './img/daniel/Idle.png',
+      framesMax: 8
+    },
+    run: {
+      imageSrc: './img/daniel/move.png',
+      framesMax: 8
+    },
+    jump: {
+      imageSrc: './img/daniel/jump.png',
+      framesMax: 3
+    },
+    fall: {
+      imageSrc: './img/daniel/fall.png',
+      framesMax: 3
+    },
+    attack1: {
+      imageSrc: './img/daniel/Attack.png',
+      framesMax: 8
+    },
+    takeHit: {
+      imageSrc: './img/daniel/Take hit.png',
+      framesMax: 4
+    },
+    death: {
+      imageSrc: './img/daniel/Death.png',
+      framesMax: 5
+    },
+    skill: {
+      imageSrc: './img/daniel/Attack.png',
+      framesMax: 8
+    }
+  },
+  health: 100,
+  damageTaken: 10,
+  attackBox: {
+    offset: {
+      x: 160,
+      y: 65
+    },
+    width: 90,
+    height: 50
+  }
+})
+
+var player = tristan
+
+tristanButton.addEventListener("click", function(){
+  player = tristan
+  tristanButton.textContent = "SELECTED"
+  davidButton.setAttribute('disabled', 'disabled');
+  jessicaButton.setAttribute('disabled', 'disabled');
+  danielButton.setAttribute('disabled', 'disabled');
+  decideHitFrame()
+});
+
+jessicaButton.addEventListener("click", function(){
+  player = jessica
+  jessicaButton.textContent = "SELECTED"
+  tristanButton.setAttribute('disabled', 'disabled');
+  davidButton.setAttribute('disabled', 'disabled');
+  danielButton.setAttribute('disabled', 'disabled');
+  decideHitFrame()
+});
+
+davidButton.addEventListener("click", function(){
+  player = david
+  davidButton.textContent = "SELECTED"
+  tristanButton.setAttribute('disabled', 'disabled');
+  jessicaButton.setAttribute('disabled', 'disabled');
+  danielButton.setAttribute('disabled', 'disabled');
+  decideHitFrame()
+});
+
+danielButton.addEventListener("click", function(){
+  player = daniel
+  danielButton.textContent = "SELECTED"
+  tristanButton.setAttribute('disabled', 'disabled');
+  jessicaButton.setAttribute('disabled', 'disabled');
+  davidButton.setAttribute('disabled', 'disabled');
+  decideHitFrame()
+})
+
+var enemy = kentonEnemy
+
+//deciding attacking frame
+var playerHitFrame
+var enemyHitFrame
+
+function decideHitFrame() {
+  console.log(player.id)
+  if (player.id == 1) {
+    playerHitFrame = 4
+  } else if (player.id == 2) {
+    playerHitFrame = 2
+  } else if (player.id == 3) {
+    playerHitFrame = 1
+  } else if (player.id == 4) {
+    playerHitFrame = 5
+  } else if (player.id == 5) {
+    playerHitFrame = 3
+  }
+  if (enemy.id == 1) {
+    enemyHitFrame = 4
+  } else if (enemy.id == 2) {
+    enemyHitFrame = 2
+  } else if (enemy.id == 3) {
+    enemyHitFrame = 1
+  } else if (enemy.id == 4) {
+    enemyHitFrame = 5
+  } else if (enemy.id == 5) {
+    enemyHitFrame = 3
+  }
+}
 
 console.log(player)
 
@@ -251,23 +472,7 @@ const keys = {
 decreaseTimer()
 
 function animate() {
-  //deciding attacking speed
-  var playerHitFrame
-  if (player.id == 1) {
-    playerHitFrame = 4
-  } else if (player.id == 2) {
-    playerHitFrame = 2
-  } else if (player.id == 3) {
-    playerHitFrame = 1
-  }
-  var enemyHitFrame
-  if (enemy.id == 1) {
-    enemyHitFrame = 4
-  } else if (enemy.id == 2) {
-    enemyHitFrame = 2
-  } else if (enemy.id == 3) {
-    enemyHitFrame = 1
-  }
+
 
   window.requestAnimationFrame(animate)
   c.fillStyle = 'black'
@@ -341,6 +546,12 @@ function animate() {
       player.damageTaken = 10;
       enemy.damageTaken = 10;
     }
+
+    if (player.id == 4) {
+      player.attackBox.width = 150;
+      enemy.damageTaken = 10;
+      playerHitFrame = 5
+    }
   }
 
   // if player misses
@@ -351,6 +562,11 @@ function animate() {
       player.attackBox.width = 140;
       player.damageTaken = 10;
       enemy.damageTaken = 10;
+    }
+    if (player.id == 4) {
+      player.attackBox.width = 150;
+      enemy.damageTaken = 15;
+      playerHitFrame = 5
     }
   }
 
@@ -403,11 +619,21 @@ window.addEventListener('keydown', (event) => {
         player.velocity.y = -20
         break
       case 's':
+        if (player.id == 4) {
+          enemy.damageTaken = 15;
+        }
+        if (player.id == 5) {
+          enemy.damageTaken = 25;
+        }
         player.attack()
         break
       case 'q':
         if (player.id == 1) {
           enemy.damageTaken = 20;
+        }
+        if (player.id == 4) {
+          playerHitFrame = 6
+          enemy.damageTaken = 25;
         }
         player.skill()
         break
@@ -431,7 +657,7 @@ window.addEventListener('keydown', (event) => {
         enemy.attack()
         break
       case 'u':
-        player.damageTaken = 20
+        player.damageTaken = 27
         enemy.skill()
         break
     }
