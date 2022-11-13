@@ -374,7 +374,7 @@ const daniel = new Fighter({
   damageTaken: 10,
   attackBox: {
     offset: {
-      x: 160,
+      x: 150,
       y: 65
     },
     width: 90,

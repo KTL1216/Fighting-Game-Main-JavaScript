@@ -33,4 +33,4 @@ w: jump
 s: attack (deals 25 damage, can't hit enemy that's too close)
 
 
-https://willowy-piroshki-23d5ac.netlify.app/
+https://bright-druid-1853a4.netlify.app
