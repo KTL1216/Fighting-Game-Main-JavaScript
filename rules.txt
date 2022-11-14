@@ -19,7 +19,7 @@ a: left
 d: right
 w: jump
 s: attack (deals 10 damage shorter range, takes 3 frame)
-q: special ability (deals 10 damage in longer range, takes 4 frame, invincible during, teleport in front)
+q: special ability (deals 10 damage, takes 4 frame, invincible during, teleport in front)
 
 Player 1 - David
 a: left
@@ -34,4 +34,18 @@ d: right
 w: jump
 s: attack (deals 25 damage, can't hit enemy that's too close)
 
-https://comfy-cactus-59e28a.netlify.app/
+Player 1 - Michael (takes 3 less damage of all attacks)
+a: left
+d: right
+w: jump
+s: attack (deals 10 damage shorter range, takes 3 frame)
+q: special ability (deals 10 damage, takes 4 frame, jump up)
+
+Player 1 - Ben
+a: left
+d: right
+w: jump
+s: attack (deals 15 damage, can't hit enemy that's too close)
+q: special ability (switch to tiger mode)
+
+https://fabulous-frangollo-4f3d77.netlify.app
