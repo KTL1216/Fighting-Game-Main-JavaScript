@@ -17,6 +17,10 @@ let tristanButton = document.getElementById("tristan-button");
 let jessicaButton = document.getElementById("jessica-button");
 let davidButton = document.getElementById("david-button");
 let danielButton = document.getElementById("daniel-button");
+let michaelButton = document.getElementById("michael-button");
+let benButton = document.getElementById("ben-button");
+
+const buttonList = [tristanButton, jessicaButton, davidButton, danielButton, michaelButton, benButton]
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
@@ -108,7 +112,7 @@ const tristan = new Fighter({
       x: 100,
       y: 50
     },
-    width: 140,
+    width: 150,
     height: 50
   }
 })
@@ -116,7 +120,7 @@ const tristan = new Fighter({
 const kentonEnemy = new Fighter({
   id: 2,
   position: {
-    x: 900,
+    x: 950,
     y: 100
   },
   velocity: {
@@ -174,10 +178,10 @@ const kentonEnemy = new Fighter({
   attackBox: {
     offset: {
       x: -170,
-      y: 50
+      y: 35
     },
     width: 130,
-    height: 50
+    height: 65
   }
 })
 
@@ -224,7 +228,7 @@ const jessica = new Fighter({
       framesMax: 3
     },
     takeHit: {
-      imageSrc: './img/jessica/Take hit.png',
+      imageSrc: './img/jessica/Take Hit.png',
       framesMax: 4
     },
     death: {
@@ -307,7 +311,7 @@ const david = new Fighter({
   damageTaken: 10,
   attackBox: {
     offset: {
-      x: 130,
+      x: 120,
       y: 65
     },
     width: 120,
@@ -358,7 +362,7 @@ const daniel = new Fighter({
       framesMax: 8
     },
     takeHit: {
-      imageSrc: './img/daniel/Take hit.png',
+      imageSrc: './img/daniel/Take Hit.png',
       framesMax: 4
     },
     death: {
@@ -382,41 +386,269 @@ const daniel = new Fighter({
   }
 })
 
+const michael = new Fighter({
+  id: 6,
+  position: {
+    x: 0,
+    y: 0
+  },
+  velocity: {
+    x: 0,
+    y: 0
+  },
+  offset: {
+    x: 0,
+    y: 0
+  },
+  imageSrc: './img/michael/Idle.png',
+  framesMax: 8,
+  scale: 3.5,
+  offset: {
+    x: 120,
+    y: 83
+  },
+  sprites: {
+    idle: {
+      imageSrc: './img/michael/Idle.png',
+      framesMax: 4
+    },
+    run: {
+      imageSrc: './img/michael/Run.png',
+      framesMax: 8
+    },
+    jump: {
+      imageSrc: './img/michael/Jump.png',
+      framesMax: 2
+    },
+    fall: {
+      imageSrc: './img/michael/Fall.png',
+      framesMax: 2
+    },
+    attack1: {
+      imageSrc: './img/michael/Attack2.png',
+      framesMax: 4
+    },
+    takeHit: {
+      imageSrc: './img/michael/Take Hit.png',
+      framesMax: 4
+    },
+    death: {
+      imageSrc: './img/michael/Death.png',
+      framesMax: 4
+    },
+    skill: {
+      imageSrc: './img/michael/Attack1.png',
+      framesMax: 4
+    }
+  },
+  health: 100,
+  damageTaken: 10,
+  attackBox: {
+    offset: {
+      x: 70,
+      y: 50
+    },
+    width: 110,
+    height: 50
+  }
+})
+
+const ben = new Fighter({
+  id: 7,
+  position: {
+    x: 0,
+    y: 0
+  },
+  velocity: {
+    x: 0,
+    y: 0
+  },
+  offset: {
+    x: 0,
+    y: 0
+  },
+  imageSrc: './img/ben/Idle.png',
+  framesMax: 11,
+  scale: 1.4,
+  offset: {
+    x: 140,
+    y: 50
+  },
+  sprites: {
+    idle: {
+      imageSrc: './img/ben/Idle.png',
+      framesMax: 6
+    },
+    run: {
+      imageSrc: './img/ben/Run.png',
+      framesMax: 8
+    },
+    jump: {
+      imageSrc: './img/ben/Jump.png',
+      framesMax: 2
+    },
+    fall: {
+      imageSrc: './img/ben/Fall.png',
+      framesMax: 2
+    },
+    attack1: {
+      imageSrc: './img/ben/Attack2.png',
+      framesMax: 7
+    },
+    takeHit: {
+      imageSrc: './img/ben/Hit.png',
+      framesMax: 4
+    },
+    death: {
+      imageSrc: './img/ben/Death.png',
+      framesMax: 7
+    },
+    skill: {
+      imageSrc: './img/ben/Attack1.png',
+      framesMax: 8
+    }
+  },
+  health: 100,
+  damageTaken: 10,
+  attackBox: {
+    offset: {
+      x: 75,
+      y: 65
+    },
+    width: 165,
+    height: 50
+  }
+})
+
+const tiger = new Fighter({
+  id: 8,
+  position: {
+    x: 0,
+    y: 0
+  },
+  velocity: {
+    x: 0,
+    y: 0
+  },
+  offset: {
+    x: 0,
+    y: 0
+  },
+  imageSrc: './img/tiger/Idle.png',
+  framesMax: 11,
+  scale: 3.5,
+  offset: {
+    x: 120,
+    y: 83
+  },
+  sprites: {
+    idle: {
+      imageSrc: './img/tiger/Idle.png',
+      framesMax: 11
+    },
+    run: {
+      imageSrc: './img/tiger/Run.png',
+      framesMax: 5
+    },
+    jump: {
+      imageSrc: './img/tiger/Jump.png',
+      framesMax: 3
+    },
+    fall: {
+      imageSrc: './img/tiger/Fall.png',
+      framesMax: 3
+    },
+    attack1: {
+      imageSrc: './img/tiger/Attack1.png',
+      framesMax: 5
+    },
+    takeHit: {
+      imageSrc: './img/tiger/Take Hit.png',
+      framesMax: 3
+    },
+    death: {
+      imageSrc: './img/tiger/Death.png',
+      framesMax: 5
+    },
+    skill: {
+      imageSrc: './img/tiger/Attack2.png',
+      framesMax: 7
+    }
+  },
+  health: 100,
+  damageTaken: 10,
+  attackBox: {
+    offset: {
+      x: 70,
+      y: 70
+    },
+    width: 110,
+    height: 50
+  }
+})
+
 var player = tristan
 
 tristanButton.addEventListener("click", function(){
   player = tristan
   tristanButton.textContent = "SELECTED"
-  davidButton.setAttribute('disabled', 'disabled');
-  jessicaButton.setAttribute('disabled', 'disabled');
-  danielButton.setAttribute('disabled', 'disabled');
+  buttonList.forEach(function (item, index) {
+    item.setAttribute('disabled', 'disabled');
+  });
   decideHitFrame()
 });
 
 jessicaButton.addEventListener("click", function(){
   player = jessica
   jessicaButton.textContent = "SELECTED"
-  tristanButton.setAttribute('disabled', 'disabled');
-  davidButton.setAttribute('disabled', 'disabled');
-  danielButton.setAttribute('disabled', 'disabled');
+  buttonList.forEach(function (item, index) {
+    item.setAttribute('disabled', 'disabled');
+  });
   decideHitFrame()
 });
 
 davidButton.addEventListener("click", function(){
   player = david
   davidButton.textContent = "SELECTED"
-  tristanButton.setAttribute('disabled', 'disabled');
-  jessicaButton.setAttribute('disabled', 'disabled');
-  danielButton.setAttribute('disabled', 'disabled');
+  buttonList.forEach(function (item, index) {
+    item.setAttribute('disabled', 'disabled');
+  });
   decideHitFrame()
 });
 
 danielButton.addEventListener("click", function(){
   player = daniel
   danielButton.textContent = "SELECTED"
-  tristanButton.setAttribute('disabled', 'disabled');
-  jessicaButton.setAttribute('disabled', 'disabled');
-  davidButton.setAttribute('disabled', 'disabled');
+  buttonList.forEach(function (item, index) {
+    item.setAttribute('disabled', 'disabled');
+  });
+  decideHitFrame()
+})
+
+danielButton.addEventListener("click", function(){
+  player = daniel
+  danielButton.textContent = "SELECTED"
+  buttonList.forEach(function (item, index) {
+    item.setAttribute('disabled', 'disabled');
+  });
+  decideHitFrame()
+})
+
+michaelButton.addEventListener("click", function(){
+  player = michael
+  michaelButton.textContent = "SELECTED"
+  buttonList.forEach(function (item, index) {
+    item.setAttribute('disabled', 'disabled');
+  });
+  decideHitFrame()
+})
+
+benButton.addEventListener("click", function(){
+  player = ben
+  benButton.textContent = "SELECTED"
+  buttonList.forEach(function (item, index) {
+    item.setAttribute('disabled', 'disabled');
+  });
   decideHitFrame()
 })
 
@@ -438,18 +670,16 @@ function decideHitFrame() {
     playerHitFrame = 5
   } else if (player.id == 5) {
     playerHitFrame = 3
+  } else if (player.id == 6) {
+    playerHitFrame = 2
+  } else if (player.id == 7) {
+    playerHitFrame = 5
+  } else if (player.id == 8) {
+    playerHitFrame = 3
   }
-  if (enemy.id == 1) {
-    enemyHitFrame = 4
-  } else if (enemy.id == 2) {
+  if (enemy.id == 2) {
     enemyHitFrame = 2
-  } else if (enemy.id == 3) {
-    enemyHitFrame = 1
-  } else if (enemy.id == 4) {
-    enemyHitFrame = 5
-  } else if (enemy.id == 5) {
-    enemyHitFrame = 3
-  }
+  } 
 }
 
 console.log(player)
@@ -557,6 +787,15 @@ function animate() {
       enemy.damageTaken = 10;
       playerHitFrame = 5
     }
+
+    if (player.id == 8) {
+      player.attackBox.width = 110;
+      enemy.damageTaken = 10;
+    }
+
+    if (player.id == 6) {
+      enemy.damageTaken = 10;
+    }
   }
 
   // if player misses
@@ -572,6 +811,13 @@ function animate() {
       player.attackBox.width = 150;
       enemy.damageTaken = 15;
       playerHitFrame = 5
+    }
+    if (player.id == 8) {
+      player.attackBox.width = 110;
+      enemy.damageTaken = 10;
+    }
+    if (player.id == 6) {
+      enemy.damageTaken = 10;
     }
   }
 
@@ -630,6 +876,9 @@ window.addEventListener('keydown', (event) => {
         if (player.id == 5) {
           enemy.damageTaken = 25;
         }
+        if (player.id == 7) {
+          enemy.damageTaken = 15;
+        }
         player.attack()
         break
       case 'q':
@@ -640,7 +889,20 @@ window.addEventListener('keydown', (event) => {
           playerHitFrame = 6
           enemy.damageTaken = 25;
         }
+        
+        if (player.id == 8) {
+          enemy.damageTaken = 20;
+        }
         player.skill()
+        if (player.id == 7) {
+          player.id = tiger.id
+          player.scale = tiger.scale
+          player.imageSrc = tiger.imageSrc;
+          player.sprites = tiger.sprites;
+          player.attackBox = tiger.attackBox
+          player.offset.y += 16
+          decideHitFrame()
+        }
         break
     }
   }

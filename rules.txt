@@ -34,5 +34,4 @@ d: right
 w: jump
 s: attack (deals 25 damage, can't hit enemy that's too close)
 
-
-https://enchanting-babka-2381f5.netlify.app/
+https://comfy-cactus-59e28a.netlify.app/

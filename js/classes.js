@@ -111,7 +111,7 @@ class Fighter extends Sprite {
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y
 
-    // draw the attack box
+    //draw the attack box
     // c.fillRect(
     //   this.attackBox.position.x,
     //   this.attackBox.position.y,
@@ -121,6 +121,10 @@ class Fighter extends Sprite {
 
     this.position.x += this.velocity.x
     this.position.y += this.velocity.y
+
+    if (this.position.x < 0) {this.position.x = 0}
+    if (this.position.x > 950) {this.position.x = 950}
+    if (this.position.y < 0) {this.velocity.y = 0}
 
     // gravity function
     if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
@@ -153,11 +157,24 @@ class Fighter extends Sprite {
       this.switchSprite('skill')
       this.attackBox.width = 250;
       this.isAttacking = true
+    } else if (this.id == 6) {
+      this.switchSprite('skill')
+      this.position.y -= 150
+      this.isAttacking = true
+    } else if (this.id == 7) {
+      this.switchSprite('skill')
+    } else if (this.id == 8) {
+      this.switchSprite('skill')
+      this.attackBox.width = 65;
+      this.isAttacking = true
     }
   }
 
   takeHit() {
     this.health -= this.damageTaken
+    if (this.id == 6) {
+      this.health += 3
+    }
 
     if (this.health <= 0) {
       this.switchSprite('death')
