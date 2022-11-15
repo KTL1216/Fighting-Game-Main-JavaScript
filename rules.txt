@@ -1,3 +1,79 @@
+Player 1 - Tristan:
+a: left
+d: right
+w: jump
+s: attack (deals damage, takes 6 frame)
+q: special ability (deals more damage in longer range, takes 5 frame, invincible during, can't be used mid air or moving)
+
+Player 1 - Jessica
+a: left
+d: right
+w: jump
+s: attack (deals damage shorter range, takes 3 frame)
+q: special ability (deals damage, takes 4 frame, invincible during, teleport in front)
+
+Player 1 - David
+a: left
+d: right
+w: jump
+s: attack (deals damage shorter range, takes 7 frame)
+q: special ability (deals a lot of damage in longer range, takes 8 frame, invincible during, teleport in front)
+
+Player 1 - Daniel
+a: left
+d: right
+w: jump
+s: attack (deals more damage, can't hit enemy that's too close)
+
+Player 1 - Michael (takes 3 less damage of all attacks)
+a: left
+d: right
+w: jump
+s: attack (deals damage shorter range, takes 3 frame)
+q: special ability (deals damage, takes 4 frame, jump up)
+
+Player 1 - Ben
+a: left
+d: right
+w: jump
+s: attack (deals more damage, can't hit enemy that's too close)
+q: special ability (switch to tiger mode)
+
+Player 1 - Ben
+a: left
+d: right
+w: jump
+s: attack (deals 15 damage, can't hit enemy that's too close)
+q: special ability (transform into a tiger)
+
+Player 1 - Ben
+a: left
+d: right
+w: jump
+s: attack (deals 15 damage, can't hit enemy that's too close)
+q: special ability (transform into a tiger)
+
+Player 1 - Christina
+a: left
+d: right
+w: jump
+s: attack (deals damage, pushes enemy away)
+q: special ability (deals more damage, smaller hit box at a longer range)
+
+
+todo:
+add 2-3 more AI levels
+add 3 more playable characters (Jacob, John, Lucas)
+
+gacha:
+tahoez-gacha.surge.sh
+1. type in username
+2. click login
+3. click roll for character
+4. go to the game site and login to use your character
+
+game:
+tahoez.surge.sh
 1. type in username
 2. click login
 3. click refresh
@@ -5,60 +81,3 @@
 5. click start game
 6. press Enter to start game
 7. refresh the website to restart
-
-Player 2:
-j: left
-l: right
-i: jump
-k: attack (deals 10 damage in shorter range, takes 4 frame)
-u: special ability (deals 20 damage in longer range, takes 3 frame, can be interupted)
-
-Player 1 - Tristan:
-a: left
-d: right
-w: jump
-s: attack (deals 10 damage, takes 6 frame)
-q: special ability (deals 20 damage in longer range, takes 5 frame, invincible during, can't be used mid air or moving)
-
-Player 1 - Jessica
-a: left
-d: right
-w: jump
-s: attack (deals 10 damage shorter range, takes 3 frame)
-q: special ability (deals 10 damage, takes 4 frame, invincible during, teleport in front)
-
-Player 1 - David
-a: left
-d: right
-w: jump
-s: attack (deals 20 damage shorter range, takes 7 frame)
-q: special ability (deals 25 damage in longer range, takes 8 frame, invincible during, teleport in front)
-
-Player 1 - Daniel
-a: left
-d: right
-w: jump
-s: attack (deals 25 damage, can't hit enemy that's too close)
-
-Player 1 - Michael (takes 3 less damage of all attacks)
-a: left
-d: right
-w: jump
-s: attack (deals 10 damage shorter range, takes 3 frame)
-q: special ability (deals 10 damage, takes 4 frame, jump up)
-
-Player 1 - Ben
-a: left
-d: right
-w: jump
-s: attack (deals 15 damage, can't hit enemy that's too close)
-q: special ability (switch to tiger mode)
-
-todo:
-add 2 more AI levels
-add 5 more playable characters
-
-game:
-https://sparkly-platypus-3cb2fa.netlify.app
-gacha
-https://dazzling-gaufre-a06828.netlify.app
