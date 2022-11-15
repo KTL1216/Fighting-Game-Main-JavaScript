@@ -112,12 +112,12 @@ class Fighter extends Sprite {
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y
 
     //draw the attack box
-    // c.fillRect(
-    //   this.attackBox.position.x,
-    //   this.attackBox.position.y,
-    //   this.attackBox.width,
-    //   this.attackBox.height
-    // )
+    c.fillRect(
+      this.attackBox.position.x,
+      this.attackBox.position.y,
+      this.attackBox.width,
+      this.attackBox.height
+    )
 
     this.position.x += this.velocity.x
     this.position.y += this.velocity.y
@@ -136,6 +136,12 @@ class Fighter extends Sprite {
   attack() {
     this.switchSprite('attack1')
     this.isAttacking = true
+  }
+  
+  pushed() {
+    this.switchSprite('idle')
+    this.velocity.x = 6
+    this.position.x += 158
   }
 
   skill() {
@@ -166,6 +172,11 @@ class Fighter extends Sprite {
     } else if (this.id == 8) {
       this.switchSprite('skill')
       this.attackBox.width = 65;
+      this.isAttacking = true
+    } else if (this.id == 9) {
+      this.switchSprite('skill')
+      this.attackBox.offset.x = 240;
+      this.attackBox.width = 45;
       this.isAttacking = true
     }
   }

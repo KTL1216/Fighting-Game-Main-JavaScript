@@ -49,5 +49,9 @@ function buttonToString(index) {
     return "michael"
   } else if (index == 5) {
     return "ben"
+  } else if (index == 6) {
+    return "jacob"
+  } else if (index == 7) {
+    return "christina"
   }
 }
