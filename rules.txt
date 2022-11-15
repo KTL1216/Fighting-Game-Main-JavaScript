@@ -54,6 +54,6 @@ michael character floating issue
 character skill cooldown
 
 game:
-https://gleaming-sprite-5f8283.netlify.app
+https://sparkly-platypus-3cb2fa.netlify.app
 gacha
 https://dazzling-gaufre-a06828.netlify.app
