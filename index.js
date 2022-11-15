@@ -949,34 +949,29 @@ window.addEventListener('keyup', (event) => {
 
 function aiMoves() {
   if (!enemy.dead) {
-    if (player.position.x + 99 < enemy.position.x) {
+    if (player.position.x + 97 < enemy.position.x) {
       keys.j.pressed = true
       keys.l.pressed = false
       enemy.lastKey = 'j'
-    } else if (player.position.x + 99 > enemy.position.x) {
+    } else if (player.position.x + 97 > enemy.position.x) {
       keys.j.pressed = false
       keys.l.pressed = true
       enemy.lastKey = 'l'
     } else if (player.position.y < enemy.position.y) {
       enemy.velocity.y = -10
     } else {
-      if (enemy.framesCurrent == 0 || enemy.framesCurrent >= 3) {
-        if (player.framesCurrent == 1) {
-          if (player.image === player.sprites.idle.image || player.image === player.sprites.fall.image) {
+      if (enemy.framesCurrent <= 1 || enemy.framesCurrent >= 3) {
+        if (player.image === player.sprites.idle.image || player.image === player.sprites.fall.image) {
             player.damageTaken = 13
             enemy.skill()
-          } 
-        } else {
+          } else {
           enemy.attack()
         }
       } else {
         keys.j.pressed = false
         keys.l.pressed = false
         enemy.switchSprite('idle')
-      }
+      } 
     }
-  } else {
-    keys.j.pressed = false
-    keys.l.pressed = false
   }
 }
