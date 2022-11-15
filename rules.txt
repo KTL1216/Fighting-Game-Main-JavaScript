@@ -4,6 +4,7 @@
 4. click character
 5. click start game
 6. press Enter to start game
+7. refresh the website to restart
 
 Player 2:
 j: left
