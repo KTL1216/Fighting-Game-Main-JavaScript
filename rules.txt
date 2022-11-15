@@ -48,4 +48,4 @@ w: jump
 s: attack (deals 15 damage, can't hit enemy that's too close)
 q: special ability (switch to tiger mode)
 
-https://fabulous-frangollo-4f3d77.netlify.app
+https://resonant-haupia-0b862f.netlify.app
