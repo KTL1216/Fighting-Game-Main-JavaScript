@@ -349,7 +349,7 @@ const daniel = new Fighter({
       framesMax: 8
     },
     run: {
-      imageSrc: './img/daniel/move.png',
+      imageSrc: './img/daniel/Move.png',
       framesMax: 8
     },
     jump: {
@@ -945,6 +945,18 @@ function animate() {
 
   // end game based on health
   if (enemy.health <= 0 || player.health <= 0) {
+    if (player.deadsur) {
+      player.switchSprite('death')
+      player.velocity.x = 0
+      gameStarted = false;
+    }
+    if (enemy.dead) {
+      enemy.switchSprite('death')
+      enemy.velocity.x = 0
+      l.pressed = false
+      j.pressed = false
+      gameStarted = false;
+    }
     determineWinner({ player, enemy, timerId })
   }
 
@@ -989,7 +1001,7 @@ window.addEventListener('keydown', (event) => {
           enemy.damageTaken = 10;
         }
         if (player.id == 7) {
-          enemy.damageTaken = 10;
+          enemy.damageTaken = 7;
         }
         player.attack()
         break
