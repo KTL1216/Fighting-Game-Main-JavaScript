@@ -1,4 +1,9 @@
-press Enter to start game
+1. type in username
+2. click login
+3. click refresh
+4. click character
+5. click start game
+6. press Enter to start game
 
 Player 2:
 j: left
