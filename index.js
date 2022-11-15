@@ -408,7 +408,7 @@ const michael = new Fighter({
   scale: 3.5,
   offset: {
     x: 120,
-    y: 83
+    y: 77
   },
   sprites: {
     idle: {
@@ -727,6 +727,10 @@ function animate() {
     if (!player.dead) {
       if (!enemy.dead) {
         aiMoves()
+      } else {
+        enemy.velocity.x = 0
+        l.pressed = false
+        j.pressed = false
       }
     } else {
       enemy.velocity.x = 0

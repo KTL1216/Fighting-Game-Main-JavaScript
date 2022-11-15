@@ -48,6 +48,11 @@ w: jump
 s: attack (deals 15 damage, can't hit enemy that's too close)
 q: special ability (switch to tiger mode)
 
+todo:
+counter attack
+michael character floating issue
+character skill cooldown
+
 game:
 https://venerable-elf-5f1ccd.netlify.app
 gacha
