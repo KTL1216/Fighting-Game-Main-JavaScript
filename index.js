@@ -953,11 +953,11 @@ window.addEventListener('keyup', (event) => {
 
 function aiMoves() {
   if (!enemy.dead) {
-    if (player.position.x + 97 < enemy.position.x) {
+    if (player.position.x + 98 < enemy.position.x) {
       keys.j.pressed = true
       keys.l.pressed = false
       enemy.lastKey = 'j'
-    } else if (player.position.x + 97 > enemy.position.x) {
+    } else if (player.position.x + 96 > enemy.position.x) {
       keys.j.pressed = false
       keys.l.pressed = true
       enemy.lastKey = 'l'
