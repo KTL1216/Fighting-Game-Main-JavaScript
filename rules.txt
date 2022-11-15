@@ -48,4 +48,7 @@ w: jump
 s: attack (deals 15 damage, can't hit enemy that's too close)
 q: special ability (switch to tiger mode)
 
-https://resonant-haupia-0b862f.netlify.app
+game:
+https://venerable-elf-5f1ccd.netlify.app
+gacha
+https://dazzling-gaufre-a06828.netlify.app
