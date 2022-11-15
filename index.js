@@ -1000,9 +1000,6 @@ window.addEventListener('keydown', (event) => {
         if (player.id == 5) {
           enemy.damageTaken = 10;
         }
-        if (player.id == 7) {
-          enemy.damageTaken = 7;
-        }
         player.attack()
         break
       case 'q':
