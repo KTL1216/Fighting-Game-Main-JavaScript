@@ -515,10 +515,10 @@ const ben = new Fighter({
   damageTaken: 8,
   attackBox: {
     offset: {
-      x: 75,
+      x: 175,
       y: 65
     },
-    width: 165,
+    width: 65,
     height: 50
   }
 })
