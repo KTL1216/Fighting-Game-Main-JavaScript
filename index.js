@@ -1,5 +1,6 @@
+var userList = []
+
 function toggleDiv() {
-  console.log("toggle")
   if(document.getElementById("selection").style.display == 'inline-block')
   {
   document.getElementById("selection").style.display = 'none';
@@ -19,8 +20,10 @@ let davidButton = document.getElementById("david-button");
 let danielButton = document.getElementById("daniel-button");
 let michaelButton = document.getElementById("michael-button");
 let benButton = document.getElementById("ben-button");
+let jacobButton = document.getElementById("jacob-button");
+let christinaButton = document.getElementById("christina-button");
 
-const buttonList = [tristanButton, jessicaButton, davidButton, danielButton, michaelButton, benButton]
+const buttonList = [tristanButton, jessicaButton, davidButton, danielButton, michaelButton, benButton, jacobButton, christinaButton]
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
@@ -589,67 +592,45 @@ const tiger = new Fighter({
 
 var player = tristan
 
-tristanButton.addEventListener("click", function(){
-  player = tristan
-  tristanButton.textContent = "SELECTED"
-  buttonList.forEach(function (item, index) {
-    item.setAttribute('disabled', 'disabled');
-  });
-  decideHitFrame()
-});
+function setPlayerList() {
+  
+  buttonList.forEach(function(item, index){
+    if (userList.includes(buttonToString(index))) {
+      item.removeAttribute('disabled');
+      item.addEventListener("click", function(){
+        if (buttonToString(index) === "tristan") {
+          player = tristan
+        } else if (buttonToString(index) === "jessica") {
+          player = jessica
+        } else if (buttonToString(index) === "david") {
+          player = david
+        } else if (buttonToString(index) === "daniel") {
+          player = daniel
+        } else if (buttonToString(index) === "michael") {
+          player = michael
+        } else if (buttonToString(index) === "ben") {
+          player = ben
+        }
+        item.textContent = "SELECTED"
+        buttonList.forEach(function (item, index) {
+          item.setAttribute('disabled', 'disabled');
+        });
+        decideHitFrame()
+      });
+    } else {
+      item.setAttribute('disabled', 'disabled');
+    }
+  })
+}
+setPlayerList()
+document.getElementById("refresh").addEventListener("click", function() {
+  var dataList = document.getElementById("userList").getAttribute("data-list")
+  dataList.split(" ").forEach(function(item, index){
+    userList.push(item)
+  })
 
-jessicaButton.addEventListener("click", function(){
-  player = jessica
-  jessicaButton.textContent = "SELECTED"
-  buttonList.forEach(function (item, index) {
-    item.setAttribute('disabled', 'disabled');
-  });
-  decideHitFrame()
-});
-
-davidButton.addEventListener("click", function(){
-  player = david
-  davidButton.textContent = "SELECTED"
-  buttonList.forEach(function (item, index) {
-    item.setAttribute('disabled', 'disabled');
-  });
-  decideHitFrame()
-});
-
-danielButton.addEventListener("click", function(){
-  player = daniel
-  danielButton.textContent = "SELECTED"
-  buttonList.forEach(function (item, index) {
-    item.setAttribute('disabled', 'disabled');
-  });
-  decideHitFrame()
-})
-
-danielButton.addEventListener("click", function(){
-  player = daniel
-  danielButton.textContent = "SELECTED"
-  buttonList.forEach(function (item, index) {
-    item.setAttribute('disabled', 'disabled');
-  });
-  decideHitFrame()
-})
-
-michaelButton.addEventListener("click", function(){
-  player = michael
-  michaelButton.textContent = "SELECTED"
-  buttonList.forEach(function (item, index) {
-    item.setAttribute('disabled', 'disabled');
-  });
-  decideHitFrame()
-})
-
-benButton.addEventListener("click", function(){
-  player = ben
-  benButton.textContent = "SELECTED"
-  buttonList.forEach(function (item, index) {
-    item.setAttribute('disabled', 'disabled');
-  });
-  decideHitFrame()
+  console.log(userList)
+  setPlayerList()
 })
 
 var enemy = kentonEnemy
@@ -681,8 +662,6 @@ function decideHitFrame() {
     enemyHitFrame = 2
   } 
 }
-
-console.log(player)
 
 const keys = {
   a: {

@@ -16,7 +16,12 @@
   <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; 
                       margin: auto;  padding-top: 5px;">
     <div id="selection" style="display: inline-block; padding-top: 5px">
-      Choose your character
+      <form>
+        <input id="userId">
+      </form>
+      <button id="login">Login</button>
+      <button id="refresh">Refresh</button>
+      <h3>Choose your character</h3>
       <table>
         <tr>
           <td style="text-align: right;">
@@ -67,6 +72,16 @@
             <button id="michael-button">
               <img src="./img/characters/michael-fighter.png" style="height: 210px; width: 140px; padding-top: 20px">
               Select...
+            </button>
+          </td>
+          <td>&nbsp&nbsp</td> 
+          <td style="text-align: right;">
+            <img src="./img/characters/Christina Pan.png" style="height: 210px; width: 140px; padding-top: 20px">
+          </td>
+          <td style="text-align: left;">
+            <button id="christina-button">
+              <img src="./img/characters/christina-fighter.png" style="height: 210px; width: 140px; padding-top: 20px">
+              In progress
             </button>
           </td>
         </tr>
@@ -202,5 +217,50 @@
   ></script>
   <script src="js/utils.js"></script>
   <script src="js/classes.js"></script>
+  <script id="userList" data-list="" type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAX-SLH0URNFVWWGW7-ZRrzB2bEj39J2iQ",
+        authDomain: "tahoez-a50ff.firebaseapp.com",
+        databaseURL: "https://tahoez-a50ff-default-rtdb.firebaseio.com",
+        projectId: "tahoez-a50ff",
+        storageBucket: "tahoez-a50ff.appspot.com",
+        messagingSenderId: "531920908316",
+        appId: "1:531920908316:web:8f21bac44df2d759aaefd9"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      import {getDatabase, ref, get, child} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+      
+      const db = getDatabase()
+
+      let login = document.getElementById("login");
+      let userId = document.getElementById("userId");
+
+      var id;
+      var userListString = ""
+      login.addEventListener("click", function() {
+          console.log(userId.value);
+          id = userId.value
+          get(child(ref(db), `account/${id}`)).then((snapshot) => {
+            if (snapshot.exists()) {
+              var list = Object.keys(snapshot.val())
+              list.forEach(function(item, index){
+                if (item != "rolls") {
+                  userListString += item + " "
+                }
+              })
+            }
+            document.getElementById("userList").setAttribute("data-list", userListString);
+          })
+      })
+  </script>
   <script src="index.js"></script>
 </body>

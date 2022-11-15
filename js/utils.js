@@ -35,3 +35,19 @@ function decreaseTimer() {
     determineWinner({ player, enemy, timerId })
   }
 }
+
+function buttonToString(index) {
+  if (index == 0) {
+    return "tristan"
+  } else if (index == 1) {
+    return "jessica"
+  } else if (index == 2) {
+    return "david"
+  } else if (index == 3) {
+    return "daniel"
+  } else if (index == 4) {
+    return "michael"
+  } else if (index == 5) {
+    return "ben"
+  }
+}
