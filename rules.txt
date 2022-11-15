@@ -1,4 +1,10 @@
-press Enter to start game
+1. type in username
+2. click login
+3. click refresh
+4. click character
+5. click start game
+6. press Enter to start game
+7. refresh the website to restart
 
 Player 2:
 j: left
@@ -49,9 +55,8 @@ s: attack (deals 15 damage, can't hit enemy that's too close)
 q: special ability (switch to tiger mode)
 
 todo:
-counter attack
-michael character floating issue
-character skill cooldown
+add 2 more AI levels
+add 5 more playable characters
 
 game:
 https://sparkly-platypus-3cb2fa.netlify.app
