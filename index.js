@@ -109,7 +109,7 @@ const tristan = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 10,
+  damageTaken: 8,
   attackBox: {
     offset: {
       x: 100,
@@ -177,7 +177,7 @@ const kentonEnemy = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 10,
+  damageTaken: 6,
   attackBox: {
     offset: {
       x: -170,
@@ -244,7 +244,7 @@ const jessica = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 10,
+  damageTaken: 8,
   attackBox: {
     offset: {
       x: 80,
@@ -311,7 +311,7 @@ const david = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 10,
+  damageTaken: 8,
   attackBox: {
     offset: {
       x: 120,
@@ -378,7 +378,7 @@ const daniel = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 10,
+  damageTaken: 8,
   attackBox: {
     offset: {
       x: 150,
@@ -445,7 +445,7 @@ const michael = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 10,
+  damageTaken: 8,
   attackBox: {
     offset: {
       x: 70,
@@ -512,7 +512,7 @@ const ben = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 10,
+  damageTaken: 8,
   attackBox: {
     offset: {
       x: 75,
@@ -579,7 +579,7 @@ const tiger = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 10,
+  damageTaken: 8,
   attackBox: {
     offset: {
       x: 70,
@@ -678,9 +678,12 @@ const keys = {
   }
 }
 
+var gameStarted = false;
+
 window.addEventListener('keydown', (event) => {
   if (event.key === "Enter") {
     decreaseTimer()
+    gameStarted = true
   }
 })
 
@@ -720,12 +723,25 @@ function animate() {
     player.switchSprite('fall')
   }
 
+  if (gameStarted) {
+    if (!player.dead) {
+      if (!enemy.dead) {
+        aiMoves()
+      }
+    } else {
+      enemy.velocity.x = 0
+      enemy.switchSprite('idle')
+      l.pressed = false
+      j.pressed = false
+    }
+  }
+
   // Enemy movement
   if (keys.j.pressed && enemy.lastKey === 'j') {
-    enemy.velocity.x = -5
+    enemy.velocity.x = -4
     enemy.switchSprite('run')
   } else if (keys.l.pressed && enemy.lastKey === 'l') {
-    enemy.velocity.x = 5
+    enemy.velocity.x = 6
     enemy.switchSprite('run')
   } else {
     enemy.switchSprite('idle')
@@ -757,23 +773,23 @@ function animate() {
     
     if (player.id == 1) {
       player.attackBox.width = 140;
-      player.damageTaken = 10;
-      enemy.damageTaken = 10;
+      player.damageTaken = 8;
+      enemy.damageTaken = 6;
     }
 
     if (player.id == 4) {
       player.attackBox.width = 150;
-      enemy.damageTaken = 10;
+      enemy.damageTaken = 6;
       playerHitFrame = 5
     }
 
     if (player.id == 8) {
       player.attackBox.width = 110;
-      enemy.damageTaken = 10;
+      enemy.damageTaken = 6;
     }
 
     if (player.id == 6) {
-      enemy.damageTaken = 10;
+      enemy.damageTaken = 6;
     }
   }
 
@@ -783,20 +799,20 @@ function animate() {
 
     if (player.id == 1) {
       player.attackBox.width = 140;
-      player.damageTaken = 10;
-      enemy.damageTaken = 10;
+      player.damageTaken = 8;
+      enemy.damageTaken = 6;
     }
     if (player.id == 4) {
       player.attackBox.width = 150;
-      enemy.damageTaken = 15;
+      enemy.damageTaken = 6;
       playerHitFrame = 5
     }
     if (player.id == 8) {
       player.attackBox.width = 110;
-      enemy.damageTaken = 10;
+      enemy.damageTaken = 6;
     }
     if (player.id == 6) {
-      enemy.damageTaken = 10;
+      enemy.damageTaken = 6;
     }
   }
 
@@ -816,14 +832,14 @@ function animate() {
       width: player.health + '%'
     })
     
-    player.damageTaken = 10
+    player.damageTaken = 8
   }
 
   // if enemy misses
   if (enemy.isAttacking && enemy.framesCurrent === enemyHitFrame) {
     enemy.isAttacking = false
     
-    player.damageTaken = 10
+    player.damageTaken = 8
   }
 
   // end game based on health
@@ -850,27 +866,27 @@ window.addEventListener('keydown', (event) => {
         break
       case 's':
         if (player.id == 4) {
-          enemy.damageTaken = 15;
+          enemy.damageTaken = 11;
         }
         if (player.id == 5) {
-          enemy.damageTaken = 25;
+          enemy.damageTaken = 15;
         }
         if (player.id == 7) {
-          enemy.damageTaken = 15;
+          enemy.damageTaken = 13;
         }
         player.attack()
         break
       case 'q':
         if (player.id == 1) {
-          enemy.damageTaken = 20;
+          enemy.damageTaken = 13;
         }
         if (player.id == 4) {
           playerHitFrame = 6
-          enemy.damageTaken = 25;
+          enemy.damageTaken = 20;
         }
         
         if (player.id == 8) {
-          enemy.damageTaken = 20;
+          enemy.damageTaken = 17;
         }
         player.skill()
         if (player.id == 7) {
@@ -886,28 +902,28 @@ window.addEventListener('keydown', (event) => {
     }
   }
 
-  if (!enemy.dead) {
-    switch (event.key) {
-      case 'l':
-        keys.l.pressed = true
-        enemy.lastKey = 'l'
-        break
-      case 'j':
-        keys.j.pressed = true
-        enemy.lastKey = 'j'
-        break
-      case 'i':
-        enemy.velocity.y = -20
-        break
-      case 'k':
-        enemy.attack()
-        break
-      case 'u':
-        player.damageTaken = 27
-        enemy.skill()
-        break
-    }
-  }
+  // if (!enemy.dead) {
+  //   switch (event.key) {
+  //     case 'l':
+  //       keys.l.pressed = true
+  //       enemy.lastKey = 'l'
+  //       break
+  //     case 'j':
+  //       keys.j.pressed = true
+  //       enemy.lastKey = 'j'
+  //       break
+  //     case 'i':
+  //       enemy.velocity.y = -20
+  //       break
+  //     case 'k':
+  //       enemy.attack()
+  //       break
+  //     case 'u':
+  //       player.damageTaken = 27
+  //       enemy.skill()
+  //       break
+  //   }
+  // }
 })
 
 window.addEventListener('keyup', (event) => {
@@ -921,12 +937,46 @@ window.addEventListener('keyup', (event) => {
   }
 
   // enemy keys
-  switch (event.key) {
-    case 'l':
-      keys.l.pressed = false
-      break
-    case 'j':
-      keys.j.pressed = false
-      break
-  }
+  // switch (event.key) {
+  //   case 'l':
+  //     keys.l.pressed = false
+  //     break
+  //   case 'j':
+  //     keys.j.pressed = false
+  //     break
+  // }
 })
+
+function aiMoves() {
+  if (!enemy.dead) {
+    if (player.position.x + 99 < enemy.position.x) {
+      keys.j.pressed = true
+      keys.l.pressed = false
+      enemy.lastKey = 'j'
+    } else if (player.position.x + 99 > enemy.position.x) {
+      keys.j.pressed = false
+      keys.l.pressed = true
+      enemy.lastKey = 'l'
+    } else if (player.position.y < enemy.position.y) {
+      enemy.velocity.y = -10
+    } else {
+      if (enemy.framesCurrent == 0 || enemy.framesCurrent >= 3) {
+        if (player.framesCurrent == 1) {
+          if (player.image === player.sprites.idle.image || player.image === player.sprites.fall.image) {
+            player.damageTaken = 13
+            enemy.skill()
+          } 
+        } else {
+          enemy.attack()
+        }
+      } else {
+        keys.j.pressed = false
+        keys.l.pressed = false
+        enemy.switchSprite('idle')
+      }
+    }
+  } else {
+    keys.j.pressed = false
+    keys.l.pressed = false
+  }
+}
