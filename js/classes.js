@@ -192,7 +192,7 @@ class Fighter extends Sprite {
     } else if (this.id == 10) {
       this.switchSprite('skill')
       if (this.health < 100) {
-        this.health += 5
+        this.health += 1
       }
       this.isAttacking = false
     }
