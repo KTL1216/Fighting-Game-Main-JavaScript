@@ -60,10 +60,16 @@ w: jump
 s: attack (deals damage, pushes enemy away)
 q: special ability (deals more damage, smaller hit box at a longer range)
 
+Player 1 - Jacob
+a: left
+d: right
+w: jump
+s: attack (deals damage, blasted enemy away)
+q: special ability (when holding for more than 2 frames, regain HP)
 
 todo:
-add 2-3 more AI levels
-add 3 more playable characters (Jacob, John, Lucas)
+add 3 more AI levels
+add 2 more playable characters (John, Lucas)
 
 gacha:
 tahoez-gacha.surge.sh
