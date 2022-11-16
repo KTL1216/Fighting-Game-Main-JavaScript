@@ -700,7 +700,7 @@ const jacob = new Fighter({
       framesMax: 5
     },
     takeHit: {
-      imageSrc: './img/jacob/Take hit.png',
+      imageSrc: './img/jacob/Take Hit.png',
       framesMax: 4
     },
     death: {
@@ -1184,7 +1184,11 @@ function aiMoves() {
       && player.velocity.x == 0 
       && enemy.velocity.y == 0
       && enemy.position.x - 300 < player.position.x) {
-      enemy.velocity.y = -10
+      if (player.id == 10) {
+        enemy.velocity.y = -15
+      } else {
+        enemy.velocity.y = -10
+      }
     } else if (player.image === player.sprites.skill.image 
       && player.velocity.y == 0 
       && player.velocity.x == 0 
