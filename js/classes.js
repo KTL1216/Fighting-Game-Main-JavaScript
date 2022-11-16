@@ -207,7 +207,7 @@ class Fighter extends Sprite {
   takeHit() {
     this.health -= this.damageTaken
     if (this.id == 6) {
-      this.health += 3
+      this.health += 2
     }
 
     if (this.health <= 0) {
