@@ -384,7 +384,7 @@ const daniel = new Fighter({
       x: 210,
       y: 65
     },
-    width: 60,
+    width: 55,
     height: 50
   }
 })
@@ -719,7 +719,7 @@ const jacob = new Fighter({
       x: 80,
       y: 70
     },
-    width: 105,
+    width: 95,
     height: 50
   }
 })
@@ -964,7 +964,7 @@ function animate() {
 
     if (player.id == 10) {
       if (!enemy.dead) {
-        enemy.pushed()
+        enemy.blasted()
         l.pressed = false
         j.pressed = false
         player.backed()
