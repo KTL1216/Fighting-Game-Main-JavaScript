@@ -1184,20 +1184,14 @@ function aiMoves() {
       && player.velocity.x == 0 
       && enemy.velocity.y == 0
       && enemy.position.x - 300 < player.position.x) {
-      if (player.id == 10) {
-        enemy.velocity.y = -15
-      } else {
-        enemy.velocity.y = -10
-      }
+      enemy.velocity.y = -15
     } else if (player.image === player.sprites.skill.image 
       && player.velocity.y == 0 
       && player.velocity.x == 0 
       && enemy.velocity.y == 0
       && enemy.position.x - 300 < player.position.x) {
-      if (player.id ==4) {
+      if (player.id != 10 || player.id != 6) {
         enemy.velocity.y = -15
-      } else if (player.id != 10 || player.id != 6) {
-        enemy.velocity.y = -10
       }
     } else if (player.position.x + 142 < enemy.position.x) {
       keys.j.pressed = true

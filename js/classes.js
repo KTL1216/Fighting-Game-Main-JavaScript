@@ -147,13 +147,13 @@ class Fighter extends Sprite {
   blasted() {
     this.switchSprite('idle')
     this.velocity.x = 6
-    this.position.x += 210
+    this.position.x += 200
   }
 
   backed() {
     this.switchSprite('idle')
-    this.velocity.x = -4
-    this.position.x -= 140
+    this.velocity.x = -10
+    this.position.x -= 100
   }
 
   launched() {
