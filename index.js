@@ -714,10 +714,10 @@ const jacob = new Fighter({
   damageTaken: 8,
   attackBox: {
     offset: {
-      x: 80,
+      x: 100,
       y: 70
     },
-    width: 95,
+    width: 75,
     height: 50
   }
 })
