@@ -109,7 +109,7 @@ const tristan = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 8,
+  damageTaken: 11,
   attackBox: {
     offset: {
       x: 100,
@@ -244,7 +244,7 @@ const jessica = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 8,
+  damageTaken: 11,
   attackBox: {
     offset: {
       x: 80,
@@ -378,7 +378,7 @@ const daniel = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 8,
+  damageTaken: 11,
   attackBox: {
     offset: {
       x: 210,
@@ -512,7 +512,7 @@ const ben = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 8,
+  damageTaken: 11,
   attackBox: {
     offset: {
       x: 175,
@@ -646,13 +646,80 @@ const christina = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 8,
+  damageTaken: 9,
   attackBox: {
     offset: {
       x: 125,
       y: 70
     },
     width: 115,
+    height: 50
+  }
+})
+
+const jacob = new Fighter({
+  id: 10,
+  position: {
+    x: 0,
+    y: 0
+  },
+  velocity: {
+    x: 0,
+    y: 0
+  },
+  offset: {
+    x: 0,
+    y: 0
+  },
+  imageSrc: './img/david/Idle.png',
+  framesMax: 10,
+  scale: 2.7,
+  offset: {
+    x: 200,
+    y: 147
+  },
+  sprites: {
+    idle: {
+      imageSrc: './img/jacob/Idle.png',
+      framesMax: 8
+    },
+    run: {
+      imageSrc: './img/jacob/Run.png',
+      framesMax: 8
+    },
+    jump: {
+      imageSrc: './img/jacob/Jump.png',
+      framesMax: 3
+    },
+    fall: {
+      imageSrc: './img/jacob/Fall.png',
+      framesMax: 3
+    },
+    attack1: {
+      imageSrc: './img/jacob/Attack1.png',
+      framesMax: 5
+    },
+    takeHit: {
+      imageSrc: './img/jacob/Take hit.png',
+      framesMax: 4
+    },
+    death: {
+      imageSrc: './img/jacob/Death.png',
+      framesMax: 5
+    },
+    skill: {
+      imageSrc: './img/jacob/Attack2.png',
+      framesMax: 4
+    }
+  },
+  health: 100,
+  damageTaken: 8,
+  attackBox: {
+    offset: {
+      x: 80,
+      y: 70
+    },
+    width: 105,
     height: 50
   }
 })
@@ -679,6 +746,8 @@ function setPlayerList() {
           player = ben
         } else if (buttonToString(index) === "christina") {
           player = christina
+        } else if (buttonToString(index) === "jacob") {
+          player = jacob
         }
         item.textContent = "SELECTED"
         buttonList.forEach(function (item, index) {
@@ -728,6 +797,8 @@ function decideHitFrame() {
     playerHitFrame = 3
   } else if (player.id == 9) {
     playerHitFrame = 4
+  } else if (player.id == 10) {
+    playerHitFrame = 3
   }
   if (enemy.id == 2) {
     enemyHitFrame = 2
@@ -855,7 +926,7 @@ function animate() {
     
     if (player.id == 1) {
       player.attackBox.width = 140;
-      player.damageTaken = 8;
+      player.damageTaken = 10;
       enemy.damageTaken = 5;
     }
 
@@ -890,6 +961,21 @@ function animate() {
       player.attackBox.offset.x = 125;
       player.attackBox.width = 115;
     }
+
+    if (player.id == 10) {
+      if (!enemy.dead) {
+        enemy.pushed()
+        l.pressed = false
+        j.pressed = false
+        player.backed()
+      } else {
+        stunned = false
+        enemy.switchSprite('death')
+        enemy.velocity.x = 0
+        l.pressed = false
+        j.pressed = false
+      }
+    }
   }
 
   // if player misses
@@ -898,7 +984,7 @@ function animate() {
 
     if (player.id == 1) {
       player.attackBox.width = 140;
-      player.damageTaken = 8;
+      player.damageTaken = 10;
       enemy.damageTaken = 5;
     }
     if (player.id == 4) {
@@ -932,15 +1018,26 @@ function animate() {
     gsap.to('#playerHealth', {
       width: player.health + '%'
     })
-    
-    player.damageTaken = 8
+    if (player.id == 1 || player.id == 3 || player.id == 5 || player.id == 7) {
+      player.damageTaken == 11
+    } else if (player.id == 9) {
+      player.damageTaken == 9
+    } else {
+      player.damageTaken = 8
+    }
   }
 
   // if enemy misses
   if (enemy.isAttacking && enemy.framesCurrent === enemyHitFrame) {
     enemy.isAttacking = false
     
-    player.damageTaken = 8
+    if (player.id == 1 || player.id == 3 || player.id == 5 || player.id == 7) {
+      player.damageTaken == 11
+    } else if (player.id == 9) {
+      player.damageTaken == 9
+    } else {
+      player.damageTaken = 8
+    }
   }
 
   // end game based on health
@@ -999,6 +1096,10 @@ window.addEventListener('keydown', (event) => {
         }
         if (player.id == 5) {
           enemy.damageTaken = 10;
+        }
+        if (player.id == 10) {
+          enemy.damageTaken = 9;
+          player.health -= 3;
         }
         player.attack()
         break
@@ -1078,7 +1179,23 @@ window.addEventListener('keyup', (event) => {
 
 function aiMoves() {
   if (!enemy.dead) {
-    if (player.position.x + 142 < enemy.position.x) {
+    if (player.image === player.sprites.attack1.image 
+      && player.velocity.y == 0 
+      && player.velocity.x == 0 
+      && enemy.velocity.y == 0
+      && enemy.position.x - 300 < player.position.x) {
+      enemy.velocity.y = -10
+    } else if (player.image === player.sprites.skill.image 
+      && player.velocity.y == 0 
+      && player.velocity.x == 0 
+      && enemy.velocity.y == 0
+      && enemy.position.x - 300 < player.position.x) {
+      if (player.id ==4) {
+        enemy.velocity.y = -15
+      } else if (player.id != 10 || player.id != 6) {
+        enemy.velocity.y = -10
+      }
+    } else if (player.position.x + 142 < enemy.position.x) {
       keys.j.pressed = true
       keys.l.pressed = false
       enemy.lastKey = 'j'
@@ -1092,7 +1209,7 @@ function aiMoves() {
       if (enemy.framesCurrent <= 1 || enemy.framesCurrent >= 3) {
         if (player.image === player.sprites.idle.image || player.image === player.sprites.fall.image) {
             if (player.health > 5) {
-              player.damageTaken = 13
+              player.damageTaken = 15
               enemy.skill()
             } else {
               enemy.attack()

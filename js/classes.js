@@ -141,7 +141,18 @@ class Fighter extends Sprite {
   pushed() {
     this.switchSprite('idle')
     this.velocity.x = 6
-    this.position.x += 158
+    this.position.x += 160
+  }
+
+  backed() {
+    this.switchSprite('idle')
+    this.velocity.x = 6
+    this.position.x -= 160
+  }
+
+  launched() {
+    this.switchSprite('idle')
+    this.position.y -= 160
   }
 
   skill() {
@@ -178,6 +189,10 @@ class Fighter extends Sprite {
       this.attackBox.offset.x = 240;
       this.attackBox.width = 45;
       this.isAttacking = true
+    } else if (this.id == 10) {
+      this.switchSprite('skill')
+      this.health += 5
+      this.isAttacking = false
     }
   }
 
