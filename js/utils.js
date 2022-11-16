@@ -22,7 +22,7 @@ function determineWinner({ player, enemy, timerId }) {
   }
 }
 
-let timer = 60
+let timer = 25
 let timerId
 function decreaseTimer() {
   if (timer > 0) {
@@ -32,7 +32,18 @@ function decreaseTimer() {
   }
 
   if (timer === 0) {
-    determineWinner({ player, enemy, timerId })
+    if (enemy.health > 0) {
+      document.querySelector('#displayText').style.display = 'flex'
+      document.querySelector('#displayText').innerHTML = 'Player 2 Wins'
+      player.switchSprite('death')
+      player.velocity.x = 0
+      gameStarted = false;
+      keys.j.pressed = false
+      keys.l.pressed = false
+      enemy.switchSprite('idle')
+    } else {
+      determineWinner({ player, enemy, timerId })
+    }
   }
 }
 

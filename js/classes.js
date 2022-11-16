@@ -124,7 +124,10 @@ class Fighter extends Sprite {
 
     if (this.position.x < 0) {this.position.x = 0}
     if (this.position.x > 950) {this.position.x = 950}
-    if (this.position.y < 0) {this.velocity.y = 0}
+    if (this.position.y < 5) {
+      this.velocity.y = 0
+      this.position.y = 5
+    }
 
     // gravity function
     if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
@@ -161,6 +164,10 @@ class Fighter extends Sprite {
     this.position.y -= 160
   }
 
+  harmed() {
+    this.health -= 2
+  }
+
   skill() {
     if (this.id == 1) {
         if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) { 
@@ -178,7 +185,7 @@ class Fighter extends Sprite {
       this.isAttacking = true
     } else if (this.id == 4) {
       this.switchSprite('skill')
-      this.attackBox.width = 250;
+      this.attackBox.width = 230;
       this.isAttacking = true
     } else if (this.id == 6) {
       this.switchSprite('skill')
@@ -198,7 +205,7 @@ class Fighter extends Sprite {
     } else if (this.id == 10) {
       this.switchSprite('skill')
       if (this.health < 100) {
-        this.health += 1.5
+        this.health += 1
       }
       this.isAttacking = false
     }
@@ -217,7 +224,7 @@ class Fighter extends Sprite {
 
   switchSprite(sprite) {
     if (this.image === this.sprites.death.image) {
-      if (this.framesCurrent === this.sprites.death.framesMax - 1)
+      if (this.framesCurrent === this.sprites.death.framesMax - 2)
         this.dead = true
       return
     }

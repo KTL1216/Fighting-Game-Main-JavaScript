@@ -1,17 +1,15 @@
 var userList = []
 
+var gameStarted = false;
+
 function toggleDiv() {
   if(document.getElementById("selection").style.display == 'inline-block')
   {
   document.getElementById("selection").style.display = 'none';
   document.getElementById("game").style.display = 'inline-block';
   }
- 
-  else
-  {  
-  document.getElementById("game").style.display = 'none';
-  document.getElementById("selection").style.display = 'inline-block'
-  }
+  gameStarted = true
+  decreaseTimer()
 }
 
 let tristanButton = document.getElementById("tristan-button");
@@ -251,7 +249,7 @@ const jessica = new Fighter({
       y: 50
     },
     width: 110,
-    height: 50
+    height: 40
   }
 })
 
@@ -449,10 +447,10 @@ const michael = new Fighter({
   attackBox: {
     offset: {
       x: 70,
-      y: 50
+      y: 60
     },
     width: 110,
-    height: 50
+    height: 40
   }
 })
 
@@ -820,15 +818,6 @@ const keys = {
   }
 }
 
-var gameStarted = false;
-
-window.addEventListener('keydown', (event) => {
-  if (event.key === "Enter") {
-    decreaseTimer()
-    gameStarted = true
-  }
-})
-
 function animate() {
 
 
@@ -855,12 +844,6 @@ function animate() {
     player.switchSprite('run')
   } else {
     player.switchSprite('idle')
-    stunned = false
-    if (player.id == 9) {
-      if (player.image === player.sprites.idle.image && player.framesCurrent == 2) {
-        player.health += 0.2
-      }
-    }
   }
 
   // jumping
@@ -951,7 +934,6 @@ function animate() {
         l.pressed = false
         j.pressed = false
       } else {
-        stunned = false
         enemy.switchSprite('death')
         enemy.velocity.x = 0
         l.pressed = false
@@ -969,12 +951,19 @@ function animate() {
         j.pressed = false
         player.backed()
       } else {
-        stunned = false
         enemy.switchSprite('death')
         enemy.velocity.x = 0
         l.pressed = false
         j.pressed = false
       }
+    }
+
+    if (enemy.health < 0) {
+      enemy.switchSprite('death')
+      enemy.velocity.x = 0
+      l.pressed = false
+      j.pressed = false
+      gameStarted = false
     }
   }
 
@@ -1042,7 +1031,7 @@ function animate() {
 
   // end game based on health
   if (enemy.health <= 0 || player.health <= 0) {
-    if (player.deadsur) {
+    if (player.dead) {
       player.switchSprite('death')
       player.velocity.x = 0
       gameStarted = false;
@@ -1056,19 +1045,6 @@ function animate() {
     }
     determineWinner({ player, enemy, timerId })
   }
-
-  if (player.dead) {
-    player.switchSprite('death')
-    player.velocity.x = 0
-    gameStarted = false;
-  }
-  if (enemy.dead) {
-    enemy.switchSprite('death')
-    enemy.velocity.x = 0
-    l.pressed = false
-    j.pressed = false
-    gameStarted = false;
-  }
 }
 
 animate()
@@ -1079,43 +1055,40 @@ window.addEventListener('keydown', (event) => {
       case 'd':
         keys.d.pressed = true
         player.lastKey = 'd'
-        stunned = false
         break
       case 'a':
         keys.a.pressed = true
         player.lastKey = 'a'
-        stunned = false
         break
       case 'w':
         player.velocity.y = -20
-        stunned = false
         break
       case 's':
-        if (player.id == 4) {
-          enemy.damageTaken = 9;
-        }
         if (player.id == 5) {
           enemy.damageTaken = 10;
         }
+        if (player.id == 7) {
+          enemy.damageTaken = 7;
+        }
         if (player.id == 10) {
           enemy.damageTaken = 9;
-          player.health -= 3;
+          player.harmed();
         }
         player.attack()
         break
       case 'q':
         if (player.id == 1) {
-          enemy.damageTaken = 10;
+          enemy.damageTaken = 15;
         }
         if (player.id == 4) {
           playerHitFrame = 6
           enemy.damageTaken = 17;
         }
         if (player.id == 8) {
-          enemy.damageTaken = 17;
+          enemy.damageTaken = 20;
         }
         if (player.id == 9) {
-          enemy.damageTaken = 13;
+          enemy.damageTaken = 20;
         }
         player.skill()
         if (player.id == 7) {
@@ -1127,7 +1100,6 @@ window.addEventListener('keydown', (event) => {
           player.offset.y += 16
           decideHitFrame()
         }
-        stunned = false
         break
     }
   }
@@ -1198,9 +1170,13 @@ function aiMoves() {
       keys.l.pressed = false
       enemy.lastKey = 'j'
     } else if (player.position.x + 140 > enemy.position.x) {
-      keys.j.pressed = false
-      keys.l.pressed = true
-      enemy.lastKey = 'l'
+      if (enemy.position.x >= 949) {
+        enemy.attack()
+      } else {
+        keys.j.pressed = false
+        keys.l.pressed = true
+        enemy.lastKey = 'l'
+      }
     } else if (player.position.y < enemy.position.y) {
       enemy.velocity.y = -10
     } else {
@@ -1224,7 +1200,7 @@ function aiMoves() {
   } else {
     enemy.switchSprite('death')
     enemy.velocity.x = 0
-    l.pressed = false
-    j.pressed = false
+    keys.l.pressed = false
+    keys.j.pressed = false
   }
 }
