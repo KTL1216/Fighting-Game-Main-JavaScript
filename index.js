@@ -1112,7 +1112,7 @@ window.addEventListener('keydown', (event) => {
           enemy.damageTaken = 17;
         }
         if (player.id == 8) {
-          enemy.damageTaken = 10;
+          enemy.damageTaken = 17;
         }
         if (player.id == 9) {
           enemy.damageTaken = 13;
