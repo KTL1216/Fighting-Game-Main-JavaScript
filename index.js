@@ -877,6 +877,8 @@ function animate() {
     if (player.health > 0) {
       if (enemy.health > 0) {
         aiMoves()
+      } else {
+        enemy.switchSprite('death')
       }
     } else {
       enemy.switchSprite('idle')
