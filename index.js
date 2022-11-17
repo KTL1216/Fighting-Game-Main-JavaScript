@@ -835,20 +835,20 @@ function animate() {
   enemy.velocity.x = 0
 
   // end game based on health
-  if (enemy.health <= 0 || player.health <= 0) {
-    if (player.dead) {
+  if (enemy.image === enemy.sprites.death.image || player.health <= 0) {
+    if (player.health <= 0) {
       player.switchSprite('death')
       player.velocity.x = 0
-      gameStarted = false;
       enemy.switchSprite('idle')
+      console.log("player death health count")
     }
-    if (enemy.dead) {
+    if (enemy.health <= 0) {
       enemy.switchSprite('death')
       enemy.velocity.x = 0
-      l.pressed = false
-      j.pressed = false
-      gameStarted = false;
+      keys.l.pressed = false
+      keys.j.pressed = false
       player.switchSprite('idle')
+      console.log("enemy death health count")
     }
     determineWinner({ player, enemy, timerId })
   }
@@ -874,20 +874,14 @@ function animate() {
 
   //ai logic
   if (gameStarted) {
-    if (!player.dead) {
-      if (!enemy.dead) {
+    if (player.health > 0) {
+      if (enemy.health > 0) {
         aiMoves()
-      } else {
-        enemy.switchSprite('death')
-        enemy.velocity.x = 0
-        l.pressed = false
-        j.pressed = false
       }
     } else {
-      enemy.velocity.x = 0
       enemy.switchSprite('idle')
-      l.pressed = false
-      j.pressed = false
+      keys.l.pressed = false
+      keys.j.pressed = false
     }
   }
 
@@ -925,7 +919,13 @@ function animate() {
       width: enemy.health + '%'
     })
 
-    
+    if (enemy.health <= 0) {
+      enemy.velocity.x = 0
+      keys.l.pressed = false
+      keys.j.pressed = false
+      player.switchSprite('idle')
+    }
+
     if (player.id == 1) {
       player.attackBox.width = 140;
       player.damageTaken = 10;
@@ -948,41 +948,19 @@ function animate() {
     }
 
     if (player.id == 9) {
-      if (!enemy.dead) {
-        enemy.pushed()
-        l.pressed = false
-        j.pressed = false
-      } else {
-        enemy.switchSprite('death')
-        enemy.velocity.x = 0
-        l.pressed = false
-        j.pressed = false
-      }
+      enemy.pushed()
+      keys.l.pressed = false
+      keys.j.pressed = false
       enemy.damageTaken = 5;
       player.attackBox.offset.x = 125;
       player.attackBox.width = 115;
     }
 
     if (player.id == 10) {
-      if (!enemy.dead) {
-        enemy.blasted()
-        l.pressed = false
-        j.pressed = false
-        player.backed()
-      } else {
-        enemy.switchSprite('death')
-        enemy.velocity.x = 0
-        l.pressed = false
-        j.pressed = false
-      }
-    }
-
-    if (enemy.health < 0) {
-      enemy.switchSprite('death')
-      enemy.velocity.x = 0
-      l.pressed = false
-      j.pressed = false
-      gameStarted = false
+      enemy.blasted()
+      keys.l.pressed = false
+      keys.j.pressed = false
+      player.backed()
     }
   }
 
@@ -1052,7 +1030,7 @@ function animate() {
 animate()
 
 window.addEventListener('keydown', (event) => {
-  if (!player.dead) {
+  if (player.health > 0) {
     switch (event.key) {
       case 'd':
         keys.d.pressed = true
@@ -1152,7 +1130,7 @@ window.addEventListener('keyup', (event) => {
 })
 
 function aiMoves() {
-  if (!enemy.dead) {
+  if (enemy.health > 0) {
     if (player.image === player.sprites.attack1.image 
       && player.velocity.y == 0 
       && player.velocity.x == 0 
@@ -1199,10 +1177,5 @@ function aiMoves() {
         enemy.switchSprite('idle')
       } 
     }
-  } else {
-    enemy.switchSprite('death')
-    enemy.velocity.x = 0
-    keys.l.pressed = false
-    keys.j.pressed = false
   }
 }
