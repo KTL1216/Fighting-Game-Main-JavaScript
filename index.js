@@ -1032,7 +1032,7 @@ function animate() {
 animate()
 
 window.addEventListener('keydown', (event) => {
-  if (player.health > 0) {
+  if (player.health > 0 && player.image !== player.sprites.death.image) {
     switch (event.key) {
       case 'd':
         keys.d.pressed = true
