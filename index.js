@@ -834,6 +834,25 @@ function animate() {
   player.velocity.x = 0
   enemy.velocity.x = 0
 
+  // end game based on health
+  if (enemy.health <= 0 || player.health <= 0) {
+    if (player.dead) {
+      player.switchSprite('death')
+      player.velocity.x = 0
+      gameStarted = false;
+      enemy.switchSprite('idle')
+    }
+    if (enemy.dead) {
+      enemy.switchSprite('death')
+      enemy.velocity.x = 0
+      l.pressed = false
+      j.pressed = false
+      gameStarted = false;
+      player.switchSprite('idle')
+    }
+    determineWinner({ player, enemy, timerId })
+  }
+
   // player movement
 
   if (keys.a.pressed && player.lastKey === 'a') {
@@ -1027,23 +1046,6 @@ function animate() {
     } else {
       player.damageTaken = 8
     }
-  }
-
-  // end game based on health
-  if (enemy.health <= 0 || player.health <= 0) {
-    if (player.dead) {
-      player.switchSprite('death')
-      player.velocity.x = 0
-      gameStarted = false;
-    }
-    if (enemy.dead) {
-      enemy.switchSprite('death')
-      enemy.velocity.x = 0
-      l.pressed = false
-      j.pressed = false
-      gameStarted = false;
-    }
-    determineWinner({ player, enemy, timerId })
   }
 }
 
