@@ -242,13 +242,13 @@ const jessica = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 11,
+  damageTaken: 9,
   attackBox: {
     offset: {
-      x: 80,
-      y: 50
+      x: 65,
+      y: 100
     },
-    width: 110,
+    width: 130,
     height: 40
   }
 })
@@ -309,14 +309,14 @@ const david = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 8,
+  damageTaken: 9,
   attackBox: {
     offset: {
       x: 120,
-      y: 65
+      y: 70
     },
-    width: 120,
-    height: 50
+    width: 140,
+    height: 40
   }
 })
 
@@ -376,7 +376,7 @@ const daniel = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 11,
+  damageTaken: 12,
   attackBox: {
     offset: {
       x: 210,
@@ -443,14 +443,14 @@ const michael = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 8,
+  damageTaken: 9,
   attackBox: {
     offset: {
-      x: 70,
-      y: 60
+      x: 75,
+      y: 110
     },
-    width: 110,
-    height: 40
+    width: 130,
+    height: 35
   }
 })
 
@@ -510,10 +510,10 @@ const ben = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 11,
+  damageTaken: 12,
   attackBox: {
     offset: {
-      x: 175,
+      x: 155,
       y: 65
     },
     width: 65,
@@ -577,7 +577,7 @@ const tiger = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 8,
+  damageTaken: 9,
   attackBox: {
     offset: {
       x: 70,
@@ -644,14 +644,14 @@ const christina = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 9,
+  damageTaken: 10,
   attackBox: {
     offset: {
       x: 125,
       y: 70
     },
     width: 115,
-    height: 50
+    height: 45
   }
 })
 
@@ -711,14 +711,14 @@ const jacob = new Fighter({
     }
   },
   health: 100,
-  damageTaken: 8,
+  damageTaken: 9,
   attackBox: {
     offset: {
-      x: 100,
-      y: 70
+      x: 110,
+      y: 110
     },
-    width: 75,
-    height: 50
+    width: 95,
+    height: 40
   }
 })
 
@@ -841,6 +841,9 @@ function animate() {
       player.velocity.x = 0
       enemy.switchSprite('idle')
       console.log("player death health count")
+      gsap.to('#playerHealth', {
+        width: 0 + '%'
+      })
     }
     if (enemy.health <= 0) {
       enemy.switchSprite('death')
@@ -849,6 +852,9 @@ function animate() {
       keys.j.pressed = false
       player.switchSprite('idle')
       console.log("enemy death health count")
+      gsap.to('#enemyHealth', {
+        width: 0 + '%'
+      })
     }
     determineWinner({ player, enemy, timerId })
   }
@@ -935,7 +941,11 @@ function animate() {
     }
 
     if (player.id == 4) {
-      player.attackBox.width = 150;
+      if (player.image === player.sprites.skill.image) {
+        enemy.surpressed()
+      }
+      player.attackBox.width = 140;
+      player.attackBox.offset.y = 60;
       enemy.damageTaken = 5;
       playerHitFrame = 5
     }
@@ -1054,7 +1064,6 @@ window.addEventListener('keydown', (event) => {
         }
         if (player.id == 10) {
           enemy.damageTaken = 9;
-          player.harmed();
         }
         player.attack()
         break
@@ -1120,7 +1129,7 @@ window.addEventListener('keyup', (event) => {
       break
   }
 
-  // enemy keys
+  //enemy keys
   // switch (event.key) {
   //   case 'l':
   //     keys.l.pressed = false
@@ -1138,14 +1147,14 @@ function aiMoves() {
       && player.velocity.x == 0 
       && enemy.velocity.y == 0
       && enemy.position.x - 300 < player.position.x) {
-      enemy.velocity.y = -15
+      enemy.velocity.y = -17
     } else if (player.image === player.sprites.skill.image 
       && player.velocity.y == 0 
       && player.velocity.x == 0 
       && enemy.velocity.y == 0
       && enemy.position.x - 300 < player.position.x) {
       if (player.id != 10 || player.id != 6) {
-        enemy.velocity.y = -15
+        enemy.velocity.y = -17
       }
     } else if (player.position.x + 142 < enemy.position.x) {
       keys.j.pressed = true
@@ -1160,19 +1169,10 @@ function aiMoves() {
         enemy.lastKey = 'l'
       }
     } else if (player.position.y < enemy.position.y) {
-      enemy.velocity.y = -10
+      enemy.velocity.y = -12
     } else {
       if (enemy.framesCurrent <= 1 || enemy.framesCurrent >= 3) {
-        if (player.image === player.sprites.idle.image || player.image === player.sprites.fall.image) {
-            if (player.health > 5) {
-              player.damageTaken = 15
-              enemy.skill()
-            } else {
-              enemy.attack()
-            }
-          } else {
           enemy.attack()
-        }
       } else {
         keys.j.pressed = false
         keys.l.pressed = false

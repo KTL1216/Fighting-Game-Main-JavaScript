@@ -157,6 +157,7 @@ class Fighter extends Sprite {
     this.switchSprite('idle')
     this.velocity.x = -10
     this.position.x -= 100
+    this.health -= 4
   }
 
   launched() {
@@ -168,24 +169,30 @@ class Fighter extends Sprite {
     this.health -= 2
   }
 
+  surpressed() {
+    this.switchSprite('idle')
+    this.velocity.y += 13 
+  }
+
   skill() {
     if (this.id == 1) {
-        if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) { 
-            this.attackBox.width = 280;
-            this.switchSprite('skill')
-            this.isAttacking = true
-            this.damageTaken = 0;
-        }
-    } else if (this.id == 2) {
+      if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) { 
+        this.attackBox.width = 280;
         this.switchSprite('skill')
         this.isAttacking = true
+        this.damageTaken = 0;
+      }
+    } else if (this.id == 2) {
+      this.switchSprite('skill')
+      this.isAttacking = true
     } else if (this.id == 3) {
       this.switchSprite('skill')
       this.position.x += 150
       this.isAttacking = true
     } else if (this.id == 4) {
       this.switchSprite('skill')
-      this.attackBox.width = 230;
+      this.attackBox.width = 190;
+      this.attackBox.offset.y = 90
       this.isAttacking = true
     } else if (this.id == 6) {
       this.switchSprite('skill')
@@ -200,14 +207,14 @@ class Fighter extends Sprite {
     } else if (this.id == 9) {
       this.switchSprite('skill')
       this.attackBox.offset.x = 240;
-      this.attackBox.width = 45;
+      this.attackBox.offset.y = 95;
+      this.attackBox.width = 50;
       this.isAttacking = true
     } else if (this.id == 10) {
       this.switchSprite('skill')
       if (this.health < 100) {
         this.health += 1
       }
-      this.isAttacking = false
     }
   }
 
