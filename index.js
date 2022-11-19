@@ -159,7 +159,7 @@ const kentonEnemy = new Fighter({
     },
     attack1: {
       imageSrc: './img/kenton-enemy/Attack1.png',
-      framesMax: 4
+      framesMax: 5
     },
     takeHit: {
       imageSrc: './img/kenton-enemy/Take hit.png',
@@ -182,7 +182,7 @@ const kentonEnemy = new Fighter({
       y: 35
     },
     width: 130,
-    height: 65
+    height: 100
   }
 })
 
@@ -323,7 +323,7 @@ const david = new Fighter({
 const daniel = new Fighter({
   id: 5,
   position: {
-    x: 0,
+    x: 400,
     y: 0
   },
   velocity: {
@@ -647,11 +647,11 @@ const christina = new Fighter({
   damageTaken: 10,
   attackBox: {
     offset: {
-      x: 125,
+      x: 120,
       y: 70
     },
-    width: 115,
-    height: 45
+    width: 110,
+    height: 40
   }
 })
 
@@ -714,10 +714,10 @@ const jacob = new Fighter({
   damageTaken: 9,
   attackBox: {
     offset: {
-      x: 110,
+      x: 155,
       y: 110
     },
-    width: 95,
+    width: 50,
     height: 40
   }
 })
@@ -799,7 +799,7 @@ function decideHitFrame() {
     playerHitFrame = 3
   }
   if (enemy.id == 2) {
-    enemyHitFrame = 2
+    enemyHitFrame = 3
   } 
 }
 
@@ -936,7 +936,7 @@ function animate() {
 
     if (player.id == 1) {
       player.attackBox.width = 140;
-      player.damageTaken = 10;
+      player.damageTaken = 9;
       enemy.damageTaken = 5;
     }
 
@@ -963,7 +963,7 @@ function animate() {
       enemy.pushed()
       keys.l.pressed = false
       keys.j.pressed = false
-      enemy.damageTaken = 5;
+      enemy.damageTaken = 4;
       player.attackBox.offset.x = 125;
       player.attackBox.width = 115;
     }
@@ -982,7 +982,7 @@ function animate() {
 
     if (player.id == 1) {
       player.attackBox.width = 140;
-      player.damageTaken = 10;
+      player.damageTaken = 9;
       enemy.damageTaken = 5;
     }
     if (player.id == 4) {
@@ -995,7 +995,7 @@ function animate() {
       enemy.damageTaken = 5;
     }
     if (player.id == 9) {
-      enemy.damageTaken = 5;
+      enemy.damageTaken = 4;
       player.attackBox.offset.x = 125;
       player.attackBox.width = 115;
     }
@@ -1016,26 +1016,14 @@ function animate() {
     gsap.to('#playerHealth', {
       width: player.health + '%'
     })
-    if (player.id == 1 || player.id == 3 || player.id == 5 || player.id == 7) {
-      player.damageTaken == 11
-    } else if (player.id == 9) {
-      player.damageTaken == 9
-    } else {
-      player.damageTaken = 8
-    }
+    player.damageTaken == 9
   }
 
   // if enemy misses
   if (enemy.isAttacking && enemy.framesCurrent === enemyHitFrame) {
     enemy.isAttacking = false
     
-    if (player.id == 1 || player.id == 3 || player.id == 5 || player.id == 7) {
-      player.damageTaken == 11
-    } else if (player.id == 9) {
-      player.damageTaken == 9
-    } else {
-      player.damageTaken = 8
-    }
+    player.damageTaken == 9
   }
 }
 
@@ -1056,32 +1044,40 @@ window.addEventListener('keydown', (event) => {
         player.velocity.y = -20
         break
       case 's':
+        if (player.image !== player.sprites.attack1.image && player.id != 5) {
+          if (player.id == 7) {
+            enemy.damageTaken = 7;
+          }
+          if (player.id == 9) {
+            enemy.damageTaken = 4;
+          }
+          if (player.id == 10) {
+            enemy.damageTaken = 9;
+          }
+          player.attack()
+        }
         if (player.id == 5) {
           enemy.damageTaken = 10;
+          player.attack()
         }
-        if (player.id == 7) {
-          enemy.damageTaken = 7;
-        }
-        if (player.id == 10) {
-          enemy.damageTaken = 9;
-        }
-        player.attack()
         break
       case 'q':
-        if (player.id == 1) {
-          enemy.damageTaken = 15;
+        if (player.image !== player.sprites.skill.image) {
+          if (player.id == 1) {
+            enemy.damageTaken = 15;
+          }
+          if (player.id == 4) {
+            playerHitFrame = 6
+            enemy.damageTaken = 17;
+          }
+          if (player.id == 8) {
+            enemy.damageTaken = 20;
+          }
+          if (player.id == 9) {
+            enemy.damageTaken = 20;
+          }
+          player.skill()
         }
-        if (player.id == 4) {
-          playerHitFrame = 6
-          enemy.damageTaken = 17;
-        }
-        if (player.id == 8) {
-          enemy.damageTaken = 20;
-        }
-        if (player.id == 9) {
-          enemy.damageTaken = 20;
-        }
-        player.skill()
         if (player.id == 7) {
           player.id = tiger.id
           player.scale = tiger.scale
@@ -1129,7 +1125,7 @@ window.addEventListener('keyup', (event) => {
       break
   }
 
-  //enemy keys
+  // enemy keys
   // switch (event.key) {
   //   case 'l':
   //     keys.l.pressed = false
@@ -1154,7 +1150,7 @@ function aiMoves() {
       && enemy.velocity.y == 0
       && enemy.position.x - 300 < player.position.x) {
       if (player.id != 10 || player.id != 6) {
-        enemy.velocity.y = -17
+        enemy.velocity.y = -20
       }
     } else if (player.position.x + 142 < enemy.position.x) {
       keys.j.pressed = true
@@ -1169,9 +1165,9 @@ function aiMoves() {
         enemy.lastKey = 'l'
       }
     } else if (player.position.y < enemy.position.y) {
-      enemy.velocity.y = -12
+      enemy.velocity.y = -13
     } else {
-      if (enemy.framesCurrent <= 1 || enemy.framesCurrent >= 3) {
+      if (enemy.image !== enemy.sprites.attack1.image) {
           enemy.attack()
       } else {
         keys.j.pressed = false
